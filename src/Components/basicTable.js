@@ -77,7 +77,7 @@ function BasicTable() {
                                         icon="warning"
                                         typebtn="delete"
                                     />
-                                    {/* <p>Response {alertResponse}</p> */}
+                                     <p> {alertResponse}</p>
                                 </div>
                             </td>
                         </tr>

@@ -1,11 +1,21 @@
+import React from 'react';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { DropdownSubmenu, NavDropdownMenu } from "react-bootstrap-submenu";
 import "react-bootstrap-submenu/dist/index.css";
+import "../assets/styles/headerNavbar.css"
+import { NavLink } from 'react-router-dom';
 
 function HeaderNavbar() {
+ 
+  const routesConfig = [];
+  routesConfig.push({
+    to: '/maestros-pages/configuracion-tipos',
+    text: 'Tipos y clasificación'
+  });
+
   return (
     <Navbar collapseOnSelect expand="lg" bg="primary" variant="dark">
       <Container>
@@ -18,10 +28,12 @@ function HeaderNavbar() {
 
             <Nav.Link href="#pricing">Datos</Nav.Link>
 
-            <NavDropdownMenu href="#action/3.1" title="Maestros" id="collasible-nav-dropdown">
+            <NavDropdownMenu href="#action/3.1" title="Maestros" id="collasible-nav-dropdown" className='nav-dropdown'>
 
               <DropdownSubmenu href="#action/3.7" title="Configuracion">
-                <NavDropdown.Item href="#action/8.1">Tipos y Clasificaciones</NavDropdown.Item>
+                <NavDropdown.Item className='dropdown-item'>
+                  <NavLink className="nav-header-link" to="/maestros-pages/configuracion-tipos">Tipos y Clasificaciones</NavLink>
+                </NavDropdown.Item>
                 <NavDropdown.Item href="#action/8.1">Clasificacion opcional</NavDropdown.Item>
                 <NavDropdown.Item href="#action/8.1">Colores programador</NavDropdown.Item>
                 <NavDropdown.Item href="#action/8.1">Configuracion SPP</NavDropdown.Item>
