@@ -6,10 +6,10 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import { DropdownSubmenu, NavDropdownMenu } from "react-bootstrap-submenu";
 import "react-bootstrap-submenu/dist/index.css";
 import "../assets/styles/headerNavbar.css"
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 function HeaderNavbar() {
- 
+
   const routesConfig = [];
   routesConfig.push({
     to: '/maestros-pages/configuracion-tipos',
@@ -31,14 +31,31 @@ function HeaderNavbar() {
             <NavDropdownMenu href="#action/3.1" title="Maestros" id="collasible-nav-dropdown" className='nav-dropdown'>
 
               <DropdownSubmenu href="#action/3.7" title="Configuracion">
-                <NavDropdown.Item className='dropdown-item'>
-                  <NavLink className="nav-header-link" to="/maestros-pages/configuracion-tipos">Tipos y Clasificaciones</NavLink>
+
+                <NavDropdown.Item className='dropdown-item' as={Link} to="/maestros-pages/configuracion-tipos">
+                  Tipos y Clasificaciones
+                  </NavDropdown.Item>
+
+                <NavDropdown.Item as={Link} to="/maestros-pages/configuracion-opcional">
+                  Clasificacion opcional
+                  </NavDropdown.Item>
+
+                <NavDropdown.Item as={Link} to="/maestros-pages/configuracion-color">
+                  Colores programador
                 </NavDropdown.Item>
-                <NavDropdown.Item href="#action/8.1">Clasificacion opcional</NavDropdown.Item>
-                <NavDropdown.Item href="#action/8.1">Colores programador</NavDropdown.Item>
-                <NavDropdown.Item href="#action/8.1">Configuracion SPP</NavDropdown.Item>
-                <NavDropdown.Item href="#action/8.1">Configuracion ERP</NavDropdown.Item>
-                <NavDropdown.Item href="#action/8.1">Consecutivos</NavDropdown.Item>
+
+                <NavDropdown.Item as={Link} to="/maestros-pages/configuracion-spp">
+                  Configuracion SPP
+                  </NavDropdown.Item>
+
+                <NavDropdown.Item as={Link} to="/maestros-pages/configuracion-erp">
+                  Configuracion ERP
+                  </NavDropdown.Item>
+
+                <NavDropdown.Item as={Link} to="/maestros-pages/configuracion-consecutivo">
+                  Consecutivos
+                </NavDropdown.Item>
+
                 <DropdownSubmenu href="#action/3.7" title="Text to show">
                   <NavDropdown.Item href="#action/9.1">Sub 2</NavDropdown.Item>
                 </DropdownSubmenu>
