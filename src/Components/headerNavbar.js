@@ -19,7 +19,7 @@ function HeaderNavbar() {
   return (
     <Navbar collapseOnSelect expand="lg" bg="primary" variant="dark">
       <Container>
-        <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
+        <Navbar.Brand href="#home">SPP Web</Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
@@ -32,13 +32,13 @@ function HeaderNavbar() {
 
               <DropdownSubmenu href="#action/3.7" title="Configuracion">
 
-                <NavDropdown.Item className='dropdown-item' as={Link} to="/maestros-pages/configuracion-tipos">
+                <NavDropdown.Item className='' as={Link} to="/maestros-pages/configuracion-tipos">
                   Tipos y Clasificaciones
-                  </NavDropdown.Item>
+                </NavDropdown.Item>
 
                 <NavDropdown.Item as={Link} to="/maestros-pages/configuracion-opcional">
                   Clasificacion opcional
-                  </NavDropdown.Item>
+                </NavDropdown.Item>
 
                 <NavDropdown.Item as={Link} to="/maestros-pages/configuracion-color">
                   Colores programador
@@ -46,11 +46,11 @@ function HeaderNavbar() {
 
                 <NavDropdown.Item as={Link} to="/maestros-pages/configuracion-spp">
                   Configuracion SPP
-                  </NavDropdown.Item>
+                </NavDropdown.Item>
 
                 <NavDropdown.Item as={Link} to="/maestros-pages/configuracion-erp">
                   Configuracion ERP
-                  </NavDropdown.Item>
+                </NavDropdown.Item>
 
                 <NavDropdown.Item as={Link} to="/maestros-pages/configuracion-consecutivo">
                   Consecutivos
@@ -59,29 +59,30 @@ function HeaderNavbar() {
                 <DropdownSubmenu href="#action/3.7" title="Text to show">
                   <NavDropdown.Item href="#action/9.1">Sub 2</NavDropdown.Item>
                 </DropdownSubmenu>
+
               </DropdownSubmenu>
 
               <DropdownSubmenu href="#action/3.7" title="Basicos">
 
-                <NavDropdown.Item href="#action/8.1">Departamentos y municipios</NavDropdown.Item>
-                <NavDropdown.Item href="#action/8.1">Unidades</NavDropdown.Item>
-                <NavDropdown.Item href="#action/8.1">Conversion unidades</NavDropdown.Item>
-                <NavDropdown.Item href="#action/8.1">Esctructuras Funcional</NavDropdown.Item>
+                <NavDropdown.Item as={Link} to="/maestros-pages/basicos-departamentos">Departamentos y municipios</NavDropdown.Item>
+                <NavDropdown.Item as={Link} to="/maestros-pages/basicos-unidades">Unidades</NavDropdown.Item>
+                <NavDropdown.Item as={Link} to="/maestros-pages/basicos-conversion-unidades">Conversion unidades</NavDropdown.Item>
+                <NavDropdown.Item as={Link} to="/maestros-pages/basicos-estructura-funcional">Esctructura Funcional</NavDropdown.Item>
                 <NavDropdown.Divider />
 
-                <NavDropdown.Item href="#action/8.1">Agrupacion recurso</NavDropdown.Item>
-                <NavDropdown.Item href="#action/8.1">Recursos</NavDropdown.Item>
-                <NavDropdown.Item href="#action/8.1">Tipo de recurso por proceso</NavDropdown.Item>
+                <NavDropdown.Item as={Link} to="/maestros-pages/basicos-agrupacion-recurso">Agrupacion recurso</NavDropdown.Item>
+                <NavDropdown.Item as={Link} to="/maestros-pages/basicos-recursos">Recursos</NavDropdown.Item>
+                <NavDropdown.Item as={Link} to="/maestros-pages/basicos-recurso-proceso">Tipo de recurso por proceso</NavDropdown.Item>
                 <NavDropdown.Divider />
 
-                <NavDropdown.Item href="#action/8.1">Procesos</NavDropdown.Item>
-                <NavDropdown.Item href="#action/8.1">Flujos</NavDropdown.Item>
-                <NavDropdown.Item href="#action/8.1">Operaciones</NavDropdown.Item>
-                <NavDropdown.Item href="#action/8.1">Operacion proceso por material</NavDropdown.Item>
+                <NavDropdown.Item as={Link} to="/maestros-pages/basicos-procesos">Procesos</NavDropdown.Item>
+                <NavDropdown.Item as={Link} to="/maestros-pages/basicos-flujos">Flujos</NavDropdown.Item>
+                <NavDropdown.Item as={Link} to="/maestros-pages/basicos-operaciones">Operaciones</NavDropdown.Item>
+                <NavDropdown.Item as={Link} to="/maestros-pages/basicos-operacion-proceso">Operacion proceso por material</NavDropdown.Item>
                 <NavDropdown.Divider />
 
-                <NavDropdown.Item href="#action/8.1">Clientes</NavDropdown.Item>
-                <NavDropdown.Item href="#action/8.1">Check list por pedidos</NavDropdown.Item>
+                <NavDropdown.Item  as={Link} to="/maestros-pages/basicos-clientes">Clientes</NavDropdown.Item>
+                <NavDropdown.Item  as={Link} to="/maestros-pages/basicos-validaciones">Check list por pedidos</NavDropdown.Item>
 
               </DropdownSubmenu>
 

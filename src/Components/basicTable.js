@@ -1,10 +1,15 @@
 import React from 'react';
-import { Table, Pagination } from 'react-bootstrap';
+import { Table, Pagination, Button } from 'react-bootstrap';
 import { Pencil } from 'react-bootstrap-icons';
 import "../assets/styles/table.css";
 import SweetAlert from './sweetAlert';
+import { useForm } from '../App/useForm';
+import PlaintextExample from './tipos';
+import BasicModal from './modal';
 
 function BasicTable() {
+    const { show, handleClose, handleShow } = useForm();
+
     const [alertResponse, setAlertResponse] = React.useState(null);
     const itemsPerPage = 5;
     const [currentPage, setCurrentPage] = React.useState(1);
@@ -70,14 +75,24 @@ function BasicTable() {
                             <td>{item.c4}</td>
                             <td className="fixed-column">
                                 <div className="d-flex p-2">
-                                    <a href='/'><Pencil color="royalblue" size={24} title="Editar" /></a>
+                                    <span onClick={handleShow} style= {{cursor: 'pointer'}}>
+                                          <Pencil color="royalblue" size={24} title="Editar" />
+                                    </span>
+                                         {/* Aca tendria que enviar el id  */}
+                                    {
+                                        show && (
+                                            <BasicModal handleClose={handleClose} title={"Editar"}>
+                                                <PlaintextExample />
+                                            </BasicModal>
+                                        )}
+
                                     <SweetAlert onAlertResponse={handleAlertResponse}
                                         title="Esta seguro?"
                                         text="Se eliminara el item."
                                         icon="warning"
                                         typebtn="delete"
                                     />
-                                     <p> {alertResponse}</p>
+                                    <p> {alertResponse}</p>
                                 </div>
                             </td>
                         </tr>
