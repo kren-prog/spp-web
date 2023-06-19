@@ -1,76 +1,31 @@
 import React from 'react'
-import { Table, Pagination } from 'react-bootstrap';
-import { Pencil } from 'react-bootstrap-icons';
-import SweetAlert from '../../../Components/SweetAlert';
+import ConsecutivoTable from '../../../Components/ConfiguracionConsecutivo/ConsecutivoTable';
+import BasicModal from '../../../Components/BasicModal';
+import { Button } from 'react-bootstrap';
+import { useForm } from '../../../App/useForm';
+import { PlusCircle } from 'react-bootstrap-icons';
+import ConsecutivoForm from '../../../Components/ConfiguracionConsecutivo/ConsecutivoForm';
 
 function ConfiguracionConsecutivo() {
-    const [alertResponse, setAlertResponse] = React.useState(null);
-    const itemsPerPage = 5;
-    const [currentPage, setCurrentPage] = React.useState(1);
-    const totalPages = Math.ceil(50 / itemsPerPage); // data.length
 
-    const handleAlertResponse = (response) => {
-        setAlertResponse(response);
-    };
-  
-    const data = [
-        { code: 1, identificador: 'John', description: "Lorep ipsum sit amet dolore", prefijo: 3, sufijo: 1, numInicio: 1, incremento: 1, numAviso: 1, numFInal: 2, numActual: 2, c3: 2, c4: 4 },
-        { code: 2, identificador: 'Manu', description: "Lorep ipsum sit amet dolore", prefijo: 2, sufijo: 1, numInicio: 1, incremento: 1, numAviso: 1, numFInal: 2, numActual: 2, c3: 2, c4: 4 },
-        { code: 3, identificador: 'Kim', description: "Lorep ipsum sit amet dolore", prefijo: 5,  sufijo: 1, numInicio: 1, incremento: 1, numAviso: 1, numFInal: 2, numActual: 2, c3: 2, c4: 4 },
-        { code: 4, identificador: 'Rob', description: "Lorep ipsum sit amet dolore", prefijo: 1,  sufijo: 1, numInicio: 1, incremento: 1, numAviso: 1, numFInal: 2, numActual: 2, c3: 2, c4: 4 },
-        // Agrega más objetos de datos aquí...
-    ];
-    const startIndex = (currentPage - 1) * itemsPerPage;
-    const endIndex = startIndex + itemsPerPage;
-    const currentData = data.slice(startIndex, endIndex);
+    const { show, handleClose, handleShow } = useForm();
 
-  return (
-    <Table striped bordered hover responsive size="sm">
-    <thead>
-        <tr>
-            <th>Identificador</th>
-            <th>Descripcion</th>
-            <th>Prefijo</th>
-            <th>Sufijo</th>
-            <th>Numero inicio</th>
-            <th>Incremento</th>
-            <th>Numero aviso</th>
-            <th>Numero final</th>
-            <th>Numero actual</th>
-            <th className="fixed-column">Acciones</th>
-        </tr>
-    </thead>
-    <tbody>
+    return (
+        <>
+            <Button variant="warning" className='btn btn-sm m-2 fw-bold text-white' onClick={handleShow}>
+                Añadir  <PlusCircle color="white" size={18} title="Add" />
+            </Button>
 
-        {currentData.map((item) => (
-            <tr key={item.code}>
-                <td>{item.identificador}</td>
-                <td>{item.description}</td>
-                <td>{item.prefijo}</td>
-                <td>{item.sufijo}</td>
-                <td>{item.numInicio}</td>
-                <td>{item.incremento}</td>
-                <td>{item.numAviso}</td>
-                <td>{item.numFInal}</td>
-                <td>{item.numActual}</td>
-                <td className="fixed-column">
-                    <div className="d-flex p-2">
-                        <a href='/'><Pencil color="royalblue" size={24} title="Editar" /></a>
-                        <SweetAlert onAlertResponse={handleAlertResponse}
-                            title="Esta seguro?"
-                            text="Se eliminara el item."
-                            icon="warning"
-                            typebtn="delete"
-                        />
-                        <p> {alertResponse}</p>
-                    </div>
-                </td>
-            </tr>
-        ))}
+            {
+                show && (
+                    <BasicModal handleClose={handleClose} title={"Agregar"}>
+                        <ConsecutivoForm />
+                    </BasicModal>
+                )}
+            <ConsecutivoTable />
+        </>
 
-    </tbody>
-</Table>
-  )
+    )
 }
 
 export default ConfiguracionConsecutivo

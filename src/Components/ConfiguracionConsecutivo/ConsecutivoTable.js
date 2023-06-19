@@ -1,13 +1,13 @@
-import React from 'react';
+import React from 'react'
 import { Table } from 'react-bootstrap';
 import { Pencil } from 'react-bootstrap-icons';
-import SweetAlert from '../SweetAlert';
 import { useForm } from '../../App/useForm';
-import TiposForm from './TiposForm';
+import SweetAlert from '../SweetAlert';
 import BasicModal from '../BasicModal';
 import BasicPaginate from '../BasicPaginate';
+import ConsecutivoForm from './ConsecutivoForm';
 
-function TableTipos() {
+function ConsecutivoTable() {
     const { show, handleClose, handleShow } = useForm();
 
     const [alertResponse, setAlertResponse] = React.useState(null);
@@ -24,35 +24,30 @@ function TableTipos() {
     }
 
     const data = [
-        { code: 1, tc: 'John', te: 25, description: "Lorep ipsum sit amet dolore", sequence: 3, n1: 1, n2: 1, n3: 1, n4: 1, c1: 2, c2: 2, c3: 2, c4: 4 },
-        { code: 2, tc: 'Manu', te: 22, description: "Lorep ipsum sit amet dolore", sequence: 2, n1: 1, n2: 1, n3: 1, n4: 1, c1: 2, c2: 2, c3: 2, c4: 4 },
-        { code: 3, tc: 'Kim', te: 20, description: "Lorep ipsum sit amet dolore", sequence: 5, n1: 1, n2: 1, n3: 1, n4: 1, c1: 2, c2: 2, c3: 2, c4: 4 },
-        { code: 4, tc: 'Rob', te: 15, description: "Lorep ipsum sit amet dolore", sequence: 1, n1: 1, n2: 1, n3: 1, n4: 1, c1: 2, c2: 2, c3: 2, c4: 4 },
+        { code: 1, identificador: 'John', description: "Lorep ipsum sit amet dolore", prefijo: 3, sufijo: 1, numInicio: 1, incremento: 1, numAviso: 1, numFInal: 2, numActual: 2, c3: 2, c4: 4 },
+        { code: 2, identificador: 'Manu', description: "Lorep ipsum sit amet dolore", prefijo: 2, sufijo: 1, numInicio: 1, incremento: 1, numAviso: 1, numFInal: 2, numActual: 2, c3: 2, c4: 4 },
+        { code: 3, identificador: 'Kim', description: "Lorep ipsum sit amet dolore", prefijo: 5, sufijo: 1, numInicio: 1, incremento: 1, numAviso: 1, numFInal: 2, numActual: 2, c3: 2, c4: 4 },
+        { code: 4, identificador: 'Rob', description: "Lorep ipsum sit amet dolore", prefijo: 1, sufijo: 1, numInicio: 1, incremento: 1, numAviso: 1, numFInal: 2, numActual: 2, c3: 2, c4: 4 },
         // Agrega más objetos de datos aquí...
     ];
     const startIndex = (currentPage - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
     const currentData = data.slice(startIndex, endIndex);
 
-
     return (
         <>
             <Table striped bordered hover responsive size="sm">
                 <thead>
                     <tr>
-                        <th> Codigo</th>
-                        <th>Tipo cadena</th>
-                        <th>Tipo entero</th>
+                        <th>Identificador</th>
                         <th>Descripcion</th>
-                        <th>Secuencia</th>
-                        <th>Atributo N1</th>
-                        <th>Atributo N2</th>
-                        <th>Atributo N3</th>
-                        <th>Atributo N4</th>
-                        <th>Atributo C1</th>
-                        <th>Atributo C2</th>
-                        <th>Atributo C3</th>
-                        <th>Atributo C4</th>
+                        <th>Prefijo</th>
+                        <th>Sufijo</th>
+                        <th>Numero inicio</th>
+                        <th>Incremento</th>
+                        <th>Numero aviso</th>
+                        <th>Numero final</th>
+                        <th>Numero actual</th>
                         <th className="fixed-column">Acciones</th>
                     </tr>
                 </thead>
@@ -60,29 +55,25 @@ function TableTipos() {
 
                     {currentData.map((item) => (
                         <tr key={item.code}>
-                            <td>{item.code}</td>
-                            <td>{item.tc}</td>
-                            <td>{item.te}</td>
+                            <td>{item.identificador}</td>
                             <td>{item.description}</td>
-                            <td>{item.sequence}</td>
-                            <td>{item.n1}</td>
-                            <td>{item.n2}</td>
-                            <td>{item.n3}</td>
-                            <td>{item.n4}</td>
-                            <td>{item.c1}</td>
-                            <td>{item.c2}</td>
-                            <td>{item.c3}</td>
-                            <td>{item.c4}</td>
+                            <td>{item.prefijo}</td>
+                            <td>{item.sufijo}</td>
+                            <td>{item.numInicio}</td>
+                            <td>{item.incremento}</td>
+                            <td>{item.numAviso}</td>
+                            <td>{item.numFInal}</td>
+                            <td>{item.numActual}</td>
                             <td className="fixed-column">
                                 <div className="d-flex p-2">
-                                    <span onClick={handleShow} style={{ cursor: 'pointer' }}>
+                                <span onClick={handleShow} style={{ cursor: 'pointer' }}>
                                         <Pencil color="royalblue" size={24} title="Editar" />
                                     </span>
                                     {/* Aca tendria que enviar el id  */}
                                     {
                                         show && (
                                             <BasicModal handleClose={handleClose} title={"Editar"}>
-                                                <TiposForm />
+                                                <ConsecutivoForm />
                                             </BasicModal>
                                         )}
 
@@ -100,11 +91,12 @@ function TableTipos() {
 
                 </tbody>
             </Table>
+
             <div className='d-flex justify-content-center'>
                 <BasicPaginate totalPages={totalPages} handlePageClick={handlePageClick} />
             </div>
         </>
-    );
+    )
 }
 
-export default TableTipos;
+export default ConsecutivoTable

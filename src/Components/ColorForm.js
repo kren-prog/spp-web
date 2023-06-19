@@ -1,9 +1,9 @@
 import React from 'react'
 import { Form, Row, Col, Button } from 'react-bootstrap';
 
-function FormColor() {
-
-    const [color, setColor] = React.useState('#d47eff');
+function FormColor({iniColor}) {
+// se pueden adicionar colores ?
+    const [color, setColor] = React.useState(iniColor);
     const [disabled, setDisabled] = React.useState(true);
     const [variant, setVariant] = React.useState('success');
     const [btntxt, setBtntxt] = React.useState('Editar');
@@ -16,7 +16,7 @@ function FormColor() {
         setDisabled(!disabled);
         variant === 'success' ? setVariant('secondary') : setVariant('success');
         btntxt === 'Editar' ? setBtntxt('Cancel') : setBtntxt('Editar');
-        setColor('#d47eff');
+        setColor(iniColor);
     };
 
     return (
@@ -37,7 +37,7 @@ function FormColor() {
 
             <Row>
                 <Form.Group as={Col} controlId="descripcion">
-                    <Form.Control type="text" className='' value={"Rojo"} />
+                    <Form.Control type="text" className='' value={"Magenta"} />
                 </Form.Group>
 
                 <Form.Group as={Col} controlId="color">
@@ -48,6 +48,7 @@ function FormColor() {
                     <Button variant={variant} className='btn' onClick={handleEditClick}>
                         {btntxt}
                     </Button>
+            
                     <Button variant='primary' hidden={disabled} className='ms-2'>
                         Guardar
                     </Button>
