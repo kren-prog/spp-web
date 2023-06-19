@@ -10,11 +10,75 @@ import { Link } from 'react-router-dom';
 
 function HeaderNavbar() {
 
-  const routesConfig = [];
-  routesConfig.push({
+  const routesConfig = [{
     to: '/maestros-pages/configuracion-tipos',
     text: 'Tipos y clasificación'
-  });
+  }, {
+    to: '/maestros-pages/configuracion-opcional',
+    text: 'Clasificacion opcional'
+  }, {
+    to: '/maestros-pages/configuracion-color',
+    text: 'Colores programador'
+  }, {
+    to: '/maestros-pages/configuracion-spp',
+    text: 'Configuracion SPP'
+  }, {
+    to: '/maestros-pages/configuracion-erp',
+    text: 'Configuracion ERP'
+  }, {
+    to: '/maestros-pages/configuracion-consecutivo',
+    text: 'Consecutivos'
+  }];
+
+  const routesBasic = [{
+    to: '/maestros-pages/basicos-departamentos',
+    text: 'Departamentos y municipios'
+  }, {
+    to: '/maestros-pages/basicos-unidades',
+    text: 'Unidades'
+  }, {
+    to: '/maestros-pages/basicos-conversion-unidades',
+    text: 'Conversion unidades'
+  }, {
+    to: '/maestros-pages/basicos-estructura-funcional',
+    text: 'Esctructura Funcional'
+  }, {
+    to: '',
+    text: 'DIVIDER'
+  }, {
+    to: '/maestros-pages/basicos-agrupacion-recurso',
+    text: 'Agrupacion Recurso'
+  }, {
+    to: '/maestros-pages/basicos-recursos',
+    text: 'Recursos'
+  }, {
+    to: '/maestros-pages/basicos-recurso-proceso',
+    text: 'Tipo de recurso por proceso'
+  }, {
+    to: '',
+    text: 'DIVIDER'
+  }, {
+    to: '/maestros-pages/basicos-procesos',
+    text: 'Procesos'
+  },{
+    to: '/maestros-pages/basicos-flujos',
+    text: 'Flujos'
+  },{
+    to: '/maestros-pages/basicos-operaciones',
+    text: 'Operaciones'
+  },{
+    to: '/maestros-pages/basicos-operacion-proceso',
+    text: 'Operacion proceso por material'
+  },{
+    to: '',
+    text: 'DIVIDER'
+  },{
+    to: '/maestros-pages/basicos-clientes',
+    text: 'Clientes'
+  },{
+    to: '/maestros-pages/basicos-validaciones',
+    text: 'Check list por pedidos'
+  }];
 
   return (
     <Navbar collapseOnSelect expand="lg" bg="primary" variant="dark">
@@ -24,7 +88,7 @@ function HeaderNavbar() {
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
 
-            <Nav.Link href="#features">Modulos</Nav.Link>
+            <Nav.Link href="#features" >Modulos</Nav.Link>
 
             <Nav.Link href="#pricing">Datos</Nav.Link>
 
@@ -32,63 +96,29 @@ function HeaderNavbar() {
 
               <DropdownSubmenu href="#action/3.7" title="Configuracion">
 
-                <NavDropdown.Item className='' as={Link} to="/maestros-pages/configuracion-tipos">
-                  Tipos y Clasificaciones
-                </NavDropdown.Item>
-
-                <NavDropdown.Item as={Link} to="/maestros-pages/configuracion-opcional">
-                  Clasificacion opcional
-                </NavDropdown.Item>
-
-                <NavDropdown.Item as={Link} to="/maestros-pages/configuracion-color">
-                  Colores programador
-                </NavDropdown.Item>
-
-                <NavDropdown.Item as={Link} to="/maestros-pages/configuracion-spp">
-                  Configuracion SPP
-                </NavDropdown.Item>
-
-                <NavDropdown.Item as={Link} to="/maestros-pages/configuracion-erp">
-                  Configuracion ERP
-                </NavDropdown.Item>
-
-                <NavDropdown.Item as={Link} to="/maestros-pages/configuracion-consecutivo">
-                  Consecutivos
-                </NavDropdown.Item>
-
-                <DropdownSubmenu href="#action/3.7" title="Text to show">
-                  <NavDropdown.Item href="#action/9.1">Sub 2</NavDropdown.Item>
-                </DropdownSubmenu>
+                {routesConfig.map(route => (
+                  <NavDropdown.Item className='' as={Link} to={route.to}>
+                    {route.text}
+                  </NavDropdown.Item>
+                ))}
 
               </DropdownSubmenu>
 
               <DropdownSubmenu href="#action/3.7" title="Basicos">
 
-                <NavDropdown.Item as={Link} to="/maestros-pages/basicos-departamentos">Departamentos y municipios</NavDropdown.Item>
-                <NavDropdown.Item as={Link} to="/maestros-pages/basicos-unidades">Unidades</NavDropdown.Item>
-                <NavDropdown.Item as={Link} to="/maestros-pages/basicos-conversion-unidades">Conversion unidades</NavDropdown.Item>
-                <NavDropdown.Item as={Link} to="/maestros-pages/basicos-estructura-funcional">Esctructura Funcional</NavDropdown.Item>
-                <NavDropdown.Divider />
-
-                <NavDropdown.Item as={Link} to="/maestros-pages/basicos-agrupacion-recurso">Agrupacion recurso</NavDropdown.Item>
-                <NavDropdown.Item as={Link} to="/maestros-pages/basicos-recursos">Recursos</NavDropdown.Item>
-                <NavDropdown.Item as={Link} to="/maestros-pages/basicos-recurso-proceso">Tipo de recurso por proceso</NavDropdown.Item>
-                <NavDropdown.Divider />
-
-                <NavDropdown.Item as={Link} to="/maestros-pages/basicos-procesos">Procesos</NavDropdown.Item>
-                <NavDropdown.Item as={Link} to="/maestros-pages/basicos-flujos">Flujos</NavDropdown.Item>
-                <NavDropdown.Item as={Link} to="/maestros-pages/basicos-operaciones">Operaciones</NavDropdown.Item>
-                <NavDropdown.Item as={Link} to="/maestros-pages/basicos-operacion-proceso">Operacion proceso por material</NavDropdown.Item>
-                <NavDropdown.Divider />
-
-                <NavDropdown.Item  as={Link} to="/maestros-pages/basicos-clientes">Clientes</NavDropdown.Item>
-                <NavDropdown.Item  as={Link} to="/maestros-pages/basicos-validaciones">Check list por pedidos</NavDropdown.Item>
+                {routesBasic.map((item) => (
+                  <div key={item.to}>
+                    {item.text === 'DIVIDER' ? <NavDropdown.Divider /> : <NavDropdown.Item className='' as={Link} to={item.to}>
+                      {item.text}
+                    </NavDropdown.Item>}
+                  </div>
+                ))}
 
               </DropdownSubmenu>
 
               <DropdownSubmenu href="#action/3.7" title="Especificos">
 
-                <NavDropdown.Item href="#action/8.1">Familia diseno</NavDropdown.Item>
+                <NavDropdown.Item href="#action/8.1">Familia diseño</NavDropdown.Item>
                 <NavDropdown.Item href="#action/8.1">Colores</NavDropdown.Item>
                 <NavDropdown.Item href="#action/8.1">Tallas</NavDropdown.Item>
                 <NavDropdown.Item href="#action/8.1">Grupo Talla</NavDropdown.Item>

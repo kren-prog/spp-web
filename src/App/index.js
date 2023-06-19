@@ -1,4 +1,4 @@
-import HeaderNavbar from "../Components/headerNavbar";
+import HeaderNavbar from "../Components/HeaderNavbar";
 import "react-bootstrap-submenu/dist/index.css";
 import AppRoutes from "./AppRoutes";
 

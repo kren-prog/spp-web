@@ -26,9 +26,9 @@ function BasicModal({ children, handleClose, title }) {
                     <Modal.Title>{title}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body className='bg-primary bg-opacity-10'>
-                    
-                       {/* <PlaintextExample /> */}
+
                     { children }
+                    
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>

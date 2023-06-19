@@ -1,7 +1,7 @@
 import React from 'react'
-import BasicTable from "../../../Components/basicTable";
-import PlaintextExample from "../../../Components/tipos";
-import BasicModal from '../../../Components/modal';
+import TiposTable from "../../../Components/TiposYClasificacion/TiposTable";
+import TiposForm from "../../../Components/TiposYClasificacion/TiposForm";
+import BasicModal from '../../../Components/BasicModal';
 import { Button } from 'react-bootstrap';
 import { useForm } from '../../../App/useForm';
 import { PlusCircle } from 'react-bootstrap-icons';
@@ -17,13 +17,13 @@ function TiposYClasificacion() {
             </Button>
          
             {
-                show && (
+                show && (  
                     <BasicModal handleClose={handleClose} title={"Agregar"}>
-                        <PlaintextExample />
+                        <TiposForm />
                     </BasicModal>
                 )}
 
-            <BasicTable></BasicTable>
+            <TiposTable/>
         </>
     )
 }

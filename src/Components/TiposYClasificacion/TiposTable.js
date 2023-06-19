@@ -1,19 +1,19 @@
 import React from 'react';
 import { Table, Pagination, Button } from 'react-bootstrap';
 import { Pencil } from 'react-bootstrap-icons';
-import "../assets/styles/table.css";
-import SweetAlert from './sweetAlert';
-import { useForm } from '../App/useForm';
-import PlaintextExample from './tipos';
-import BasicModal from './modal';
+import "../../assets/styles/table.css"
+import SweetAlert from '../SweetAlert';
+import { useForm } from '../../App/useForm';
+import TiposForm from './TiposForm';
+import BasicModal from '../BasicModal';
 
-function BasicTable() {
+function TableTipos() {
     const { show, handleClose, handleShow } = useForm();
 
     const [alertResponse, setAlertResponse] = React.useState(null);
     const itemsPerPage = 5;
     const [currentPage, setCurrentPage] = React.useState(1);
-    const totalPages = Math.ceil(50 / itemsPerPage); // data.length
+    const totalPages = Math.ceil(500 / itemsPerPage); // data.length
 
     const handleAlertResponse = (response) => {
         setAlertResponse(response);
@@ -82,7 +82,7 @@ function BasicTable() {
                                     {
                                         show && (
                                             <BasicModal handleClose={handleClose} title={"Editar"}>
-                                                <PlaintextExample />
+                                                <TiposForm />
                                             </BasicModal>
                                         )}
 
@@ -127,4 +127,4 @@ function BasicTable() {
     );
 }
 
-export default BasicTable;
+export default TableTipos;

@@ -1,6 +1,6 @@
 import React, { Component} from 'react'; //lazy
 import { Routes, Route } from 'react-router-dom';
-import TiposYClasificacion from '../Pages/Maestros/Configuracion/tiposYClasificacion';
+import TiposYClasificacion from '../Pages/Maestros/Configuracion/TiposYClasificacion';
 import ConfiguracionOpcional from '../Pages/Maestros/Configuracion/ConfiguracionOpcional';
 import ConfiguracionColor from '../Pages/Maestros/Configuracion/ConfiguracionColor';
 import ConfiguracionConsecutivo from '../Pages/Maestros/Configuracion/ConfiguracionConsecutivo';

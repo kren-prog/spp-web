@@ -1,15 +1,14 @@
 import React from 'react'
-import FormColor from './FormColor';
-
+import ColorForm from '../../../Components/ColorForm'
 
 function ConfiguracionColor() {
 
 
     return (
         <>
-            <FormColor />
-            <FormColor />
-            <FormColor />
+            <ColorForm />
+            <ColorForm />
+            <ColorForm />
         </>
 
     )

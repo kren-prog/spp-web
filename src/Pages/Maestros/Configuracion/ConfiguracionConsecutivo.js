@@ -1,7 +1,7 @@
 import React from 'react'
 import { Table, Pagination } from 'react-bootstrap';
 import { Pencil } from 'react-bootstrap-icons';
-import SweetAlert from '../../../Components/sweetAlert';
+import SweetAlert from '../../../Components/SweetAlert';
 
 function ConfiguracionConsecutivo() {
     const [alertResponse, setAlertResponse] = React.useState(null);

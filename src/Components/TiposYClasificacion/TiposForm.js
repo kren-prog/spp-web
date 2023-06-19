@@ -1,6 +1,8 @@
 import { BookmarkStarFill } from 'react-bootstrap-icons';
 import { Form, Row, Col, Button } from 'react-bootstrap';
-function PlaintextExample() {
+
+function TiposForm() {
+  
   return (
     <Form>
       <Row>
@@ -68,4 +70,4 @@ function PlaintextExample() {
   );
 }
 
-export default PlaintextExample;
+export default TiposForm;
