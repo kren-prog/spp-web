@@ -46,6 +46,8 @@ class AppRoutes extends Component {
           <Route path="/maestros-pages/basicos-operacion-proceso" element={<OperacionProceso/> } />
           <Route path="/maestros-pages/basicos-clientes" element={<Clientes/> } />
           <Route path="/maestros-pages/basicos-validaciones" element={<Validaciones/> } />
+        
+        
 
           <Route path="*" element={<p>NOT FOUND</p>} />
 

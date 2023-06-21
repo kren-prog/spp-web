@@ -1,55 +1,33 @@
 import React from 'react'
-import { Table } from 'react-bootstrap';
+import OperacionesForm from '../../../Components/Operaciones/OperacionesForm';
+import BasicModal from '../../../Components/BasicModal';
+import { Button } from 'react-bootstrap';
+import { useForm } from '../../../App/useForm';
+import { PlusCircle } from 'react-bootstrap-icons';
+import OperacionesTable from '../../../Components/Operaciones/OperacionesTable';
 
 function Operaciones() {
 
-  const itemsPerPage = 5;
-  const [currentPage, setCurrentPage] = React.useState(1);
-  const totalPages = Math.ceil(50 / itemsPerPage); // data.length
-
-  const data = [
-    { code: 'CON', description: 'Confeccion', observacion: 'Confeccion' },
-    { code: 'EMP', description: 'Empaque', observacion: 'Empaque'},
-];
-
-const startIndex = (currentPage - 1) * itemsPerPage;
-const endIndex = startIndex + itemsPerPage;
-const currentData = data.slice(startIndex, endIndex);
+  const { show, handleClose, handleShow } = useForm();
 
   return (
-    <Table striped bordered hover responsive size="sm">
-      <thead>
-        <tr>
-          <th>Tipo Recurso</th>
-          <th>Proceso</th>
-          <th>Observacion</th>
-          <th className="fixed-column">Acciones</th>
-        </tr>
-      </thead>
-      <tbody>
+    <>
+      <Button variant="warning" className='btn btn-sm m-2 fw-bold text-white' onClick={handleShow}>
+        Añadir  <PlusCircle color="white" size={18} title="Add" />
+      </Button>
 
-        {currentData.map((item) => (
-          <tr key={item.code}>
-            <td>{item.code}</td>
-            <td>{item.description}</td>
-            <td>{item.observacion}</td>
-            <td className="fixed-column">
-              <div className="d-flex p-2">
-                {/* <a href='/'><Pencil color="royalblue" size={24} title="Editar" /></a> */}
-                {/* <SweetAlert onAlertResponse={handleAlertResponse}
-                                        title="Esta seguro?"
-                                        text="Se eliminara el item."
-                                        icon="warning"
-                                        typebtn="delete"
-                                    />
-                                    <p> {alertResponse}</p> */}
-              </div>
-            </td>
-          </tr>
-        ))}
-
-      </tbody>
-    </Table>
+      {
+        show && (
+          <BasicModal handleClose={handleClose} title={"Agregar"}>
+            <OperacionesForm />
+          </BasicModal>
+        )}
+      <div className='d-flex justify-content-center'>
+        <div className='w-50'>
+          <OperacionesTable />
+        </div>
+      </div>
+    </>
   )
 }
 

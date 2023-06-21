@@ -10,22 +10,22 @@ function ConfiguracionOpcional() {
 
     const { show, handleClose, handleShow } = useForm();
 
-  return (
-    <>
-    <Button variant="warning" className='btn btn-sm m-2 fw-bold text-white' onClick={handleShow}>
-        Añadir  <PlusCircle color="white" size={18} title="Add" />
-    </Button>
- 
-    {
-        show && (  
-            <BasicModal handleClose={handleClose} title={"Agregar"}>
-                <OpcionalForm />
-            </BasicModal>
-        )}
+    return (
+        <>
+            <Button variant="warning" className='btn btn-sm m-2 fw-bold text-white' onClick={handleShow}>
+                Añadir  <PlusCircle color="white" size={18} title="Add" />
+            </Button>
 
-    <OpcionalTable/>
-</>
-  )
+            {
+                show && (
+                    <BasicModal handleClose={handleClose} title={"Agregar"}>
+                        <OpcionalForm />
+                    </BasicModal>
+                )}
+
+            <OpcionalTable />
+        </>
+    )
 }
 
 export default ConfiguracionOpcional

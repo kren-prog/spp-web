@@ -60,25 +60,27 @@ function HeaderNavbar() {
   }, {
     to: '/maestros-pages/basicos-procesos',
     text: 'Procesos'
-  },{
+  }, {
     to: '/maestros-pages/basicos-flujos',
     text: 'Flujos'
-  },{
+  }, {
     to: '/maestros-pages/basicos-operaciones',
     text: 'Operaciones'
-  },{
+  }, {
     to: '/maestros-pages/basicos-operacion-proceso',
     text: 'Operacion proceso por material'
-  },{
+  }, {
     to: '',
     text: 'DIVIDER'
-  },{
+  }, {
     to: '/maestros-pages/basicos-clientes',
     text: 'Clientes'
-  },{
+  }, {
     to: '/maestros-pages/basicos-validaciones',
     text: 'Check list por pedidos'
   }];
+
+
 
   return (
     <Navbar collapseOnSelect expand="lg" bg="primary" variant="dark">
@@ -97,9 +99,11 @@ function HeaderNavbar() {
               <DropdownSubmenu href="#action/3.7" title="Configuracion">
 
                 {routesConfig.map(route => (
-                  <NavDropdown.Item className='' as={Link} to={route.to}>
-                    {route.text}
-                  </NavDropdown.Item>
+                  <div key={route.to}>
+                    <NavDropdown.Item className='' as={Link} to={route.to}>
+                      {route.text}
+                    </NavDropdown.Item>
+                  </div>
                 ))}
 
               </DropdownSubmenu>
@@ -159,7 +163,11 @@ function HeaderNavbar() {
             </NavDropdownMenu>
 
             <Nav.Link href="#pricing">Procesos</Nav.Link>
-            <Nav.Link href="#pricing">Programación</Nav.Link>
+
+            <NavDropdownMenu href="#action/9.1" title="Programacion" id="collasible-nav-dropdown" className='nav-dropdown'>
+              <NavDropdown.Item as={Link} to={"/"} target="_blank">Programador</NavDropdown.Item>
+            </NavDropdownMenu>
+
             <Nav.Link href="#pricing">Reportes</Nav.Link>
             <Nav.Link href="#pricing">Ayuda</Nav.Link>
           </Nav>
