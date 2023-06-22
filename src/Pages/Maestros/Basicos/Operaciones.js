@@ -5,6 +5,7 @@ import { Button } from 'react-bootstrap';
 import { useForm } from '../../../App/useForm';
 import { PlusCircle } from 'react-bootstrap-icons';
 import OperacionesTable from '../../../Components/Operaciones/OperacionesTable';
+//import { MiTabla } from '../../../Components/Operaciones/prueba';
 
 function Operaciones() {
 
@@ -24,7 +25,8 @@ function Operaciones() {
         )}
       <div className='d-flex justify-content-center'>
         <div className='w-50'>
-          <OperacionesTable />
+   {/*    <MiTabla/> */}
+        <OperacionesTable/>
         </div>
       </div>
     </>

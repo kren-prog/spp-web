@@ -8,10 +8,13 @@ import BasicModal from '../BasicModal';
 import OperacionesForm from './OperacionesForm';
 
 function OperacionesTable() {
+    // buscar una forma de reducir el codigo de setRegistroEditado y setValues (en OperacionesForm)
+    // tal vez usando el hook useForm
+    const [registroEditado, setRegistroEditado] = React.useState({});
     const { show, handleClose, handleShow } = useForm();
     const [alertResponse, setAlertResponse] = React.useState(null);
-    const itemsPerPage = 5;
     const [currentPage, setCurrentPage] = React.useState(1);
+    const itemsPerPage = 5;
     const totalPages = Math.ceil(50 / itemsPerPage); // data.length
 
     const handleAlertResponse = (response) => {
@@ -22,9 +25,14 @@ function OperacionesTable() {
         setCurrentPage(selectedPage);
     }
 
+    const abrirModal = (registro) => {
+        handleShow();
+        setRegistroEditado(registro);
+    };
+
     const data = [
         { code: 'CON', description: 'Confeccion', observacion: 'Confeccion' },
-        { code: 'EMP', description: 'Empaque', observacion: 'Empaque'},
+        { code: 'EMP', description: 'Empaque', observacion: 'Empaque' },
     ];
 
     const startIndex = (currentPage - 1) * itemsPerPage;
@@ -51,16 +59,10 @@ function OperacionesTable() {
                             <td>{item.observacion}</td>
                             <td className="fixed-column">
                                 <div className="d-flex p-2">
-                                    <span onClick={handleShow} style={{ cursor: 'pointer' }}>
+                                    <span  onClick={() => abrirModal(item)} style={{ cursor: 'pointer' }}>
                                         <Pencil color="royalblue" size={24} title="Editar" />
+
                                     </span>
-                                    {/* Aca tendria que enviar el id  */}
-                                    {
-                                        show && (
-                                            <BasicModal handleClose={handleClose} title={"Editar"}>
-                                                <OperacionesForm operacion={item}/>
-                                            </BasicModal>
-                                        )}
 
                                     <SweetAlert onAlertResponse={handleAlertResponse}
                                         title="Esta seguro?"
@@ -81,6 +83,13 @@ function OperacionesTable() {
             <div className='d-flex justify-content-center'>
                 <BasicPaginate totalPages={totalPages} handlePageClick={handlePageClick} />
             </div>
+
+            {
+                show && (
+                    <BasicModal handleClose={handleClose} title={"Editar"}>
+                        <OperacionesForm operacion={registroEditado} />
+                    </BasicModal>
+                )}
         </>
     )
 }

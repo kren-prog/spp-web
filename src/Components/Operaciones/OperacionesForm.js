@@ -3,6 +3,9 @@ import { BookmarkStarFill } from 'react-bootstrap-icons';
 import { Form, Row, Col, Button } from 'react-bootstrap';
 
 function OperacionesForm({operacion}) {
+    // buscar una forma de reducir el codigo de setValues y setRegistroEditado (viene de table)
+    // tal vez usando el hook useForm
+    // considerar usar PropTypes (una biblioteca externa para validar las propiedades en React) para poner 'operacion' como opcional
     const [values, setValues] = React.useState(operacion);
     return (
         <Form>
@@ -16,13 +19,17 @@ function OperacionesForm({operacion}) {
             <Row>
                 <Form.Group as={Col} controlId="tipoCadena">
                     <Form.Label>Descripcion</Form.Label>
-                    <Form.Control type="text" value={values ? values.description : ""}/>
+                    <Form.Control type="text" value={values ? values.description : ""}  onChange={(e) =>
+                    setValues({ ...values, description: e.target.value })
+                  }/>
                 </Form.Group>
             </Row>
             <Row>
                 <Form.Group as={Col} controlId="tipoCadena">
                     <Form.Label>Observacion</Form.Label>
-                    <Form.Control type="text" value={values ? values.observacion : ""}/>
+                    <Form.Control type="text" value={values ? values.observacion : ""} onChange={(e) =>
+                    setValues({ ...values, observacion: e.target.value })
+                  }/>
                 </Form.Group>
             </Row>
             <div className='text-center'>
