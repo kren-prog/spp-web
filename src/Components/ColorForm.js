@@ -1,8 +1,8 @@
 import React from 'react'
 import { Form, Row, Col, Button } from 'react-bootstrap';
-
+// pertenece a maestros configuracion Colores programador
 function FormColor({iniColor}) {
-// se pueden adicionar colores ?
+// se pueden adicionar colores ? 
     const [color, setColor] = React.useState(iniColor);
     const [disabled, setDisabled] = React.useState(true);
     const [variant, setVariant] = React.useState('success');
@@ -17,7 +17,7 @@ function FormColor({iniColor}) {
         variant === 'success' ? setVariant('secondary') : setVariant('success');
         btntxt === 'Editar' ? setBtntxt('Cancel') : setBtntxt('Editar');
         setColor(iniColor);
-    };
+    }; 
 
     return (
 

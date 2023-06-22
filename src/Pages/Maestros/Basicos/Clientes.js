@@ -7,15 +7,20 @@ import ClientesTable from '../../../Components/Clientes/ClientesTable';
 function Clientes() {
   // Operacion proceso por referencia
   const [showForm, setShowForm] = React.useState(false);
+  const [variant, setVariant] = React.useState('warning');
+  const [btntxt, setBtntxt] = React.useState('Añadir');
+
   const handleShowForm = () => {
     setShowForm(!showForm);
+    variant === 'warning' ? setVariant('secondary') : setVariant('warning');
+    btntxt === 'Añadir' ? setBtntxt('CANCEL') : setBtntxt('Añadir');
   };
 
   return (
     <>
-  
-  <Button variant="warning" className='btn btn-sm m-2 fw-bold text-white' onClick={handleShowForm}>
-        Añadir  <PlusCircle color="white" size={18} title="Add" />
+
+      <Button variant={variant} className='btn btn-sm m-2 fw-bold text-white' onClick={handleShowForm}>
+        {btntxt}  <PlusCircle color="white" size={18} title="Add" />
       </Button>
       {
         showForm && (

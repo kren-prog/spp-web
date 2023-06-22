@@ -58,7 +58,7 @@ function OperacionesTable() {
                                     {
                                         show && (
                                             <BasicModal handleClose={handleClose} title={"Editar"}>
-                                                <OperacionesForm />
+                                                <OperacionesForm operacion={item}/>
                                             </BasicModal>
                                         )}
 
