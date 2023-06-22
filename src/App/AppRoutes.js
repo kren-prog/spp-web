@@ -18,6 +18,14 @@ import Operaciones from '../Pages/Maestros/Basicos/Operaciones';
 import OperacionProceso from '../Pages/Maestros/Basicos/OperacionProceso';
 import Clientes from '../Pages/Maestros/Basicos/Clientes';
 import Validaciones from '../Pages/Maestros/Basicos/Validaciones';
+import Colecciones from '../Pages/Maestros/ReferenciaVenta/Colecciones';
+import ColoresVenta from '../Pages/Maestros/ReferenciaVenta/ColoresVenta';
+import Equivalencias from '../Pages/Maestros/ReferenciaVenta/Equivalencias';
+import GrupoColor from '../Pages/Maestros/ReferenciaVenta/GrupoColor';
+import ReferenciasVenta from '../Pages/Maestros/ReferenciaVenta/ReferenciasVenta';
+import SkuVenta from '../Pages/Maestros/ReferenciaVenta/SkuVenta';
+import TallaVenta from '../Pages/Maestros/ReferenciaVenta/TallaVenta';
+
 //const TiposClasificacion = lazy(() => import('../Pages/Maestros/Configuracion/tiposYClasificacion'));
 
 class AppRoutes extends Component {
@@ -47,7 +55,13 @@ class AppRoutes extends Component {
           <Route path="/maestros-pages/basicos-clientes" element={<Clientes/> } />
           <Route path="/maestros-pages/basicos-validaciones" element={<Validaciones/> } />
         
-        
+          <Route path="/maestros-pages/referencia-colecciones" element={<Colecciones/> } />
+          <Route path="/maestros-pages/referencia-grupo-color" element={<GrupoColor /> } />
+          <Route path="/maestros-pages/referencia-colores-venta" element={<ColoresVenta/> } />
+          <Route path="/maestros-pages/referencia-talla-venta" element={<TallaVenta /> } />
+          <Route path="/maestros-pages/referencia-venta" element={<ReferenciasVenta /> } />
+          <Route path="/maestros-pages/referencia-sku-venta" element={<SkuVenta/> } />
+          <Route path="/maestros-pages/referencia-equivalencias" element={<Equivalencias /> } />
 
           <Route path="*" element={<p>NOT FOUND</p>} />
 

@@ -126,31 +126,31 @@ function HeaderNavbar() {
                 <NavDropdown.Item href="#action/8.1">Colores</NavDropdown.Item>
                 <NavDropdown.Item href="#action/8.1">Tallas</NavDropdown.Item>
                 <NavDropdown.Item href="#action/8.1">Grupo Talla</NavDropdown.Item>
-                <NavDropdown.Item href="#action/8.1">Estampado</NavDropdown.Item>
+                {/* <NavDropdown.Item href="#action/8.1">Estampado</NavDropdown.Item>
                 <NavDropdown.Item href="#action/8.1">Bordados</NavDropdown.Item>
                 <NavDropdown.Item href="#action/8.1">Pinta por material</NavDropdown.Item>
-                <NavDropdown.Item href="#action/8.1">Mezcla</NavDropdown.Item>
+                <NavDropdown.Item href="#action/8.1">Mezcla</NavDropdown.Item> */}
                 <NavDropdown.Divider />
-
+{/* 
                 <NavDropdown.Item href="#action/8.1">Piezas</NavDropdown.Item>
                 <NavDropdown.Item href="#action/8.1">Complemento piezas</NavDropdown.Item>
                 <NavDropdown.Item href="#action/8.1">Piezas por familia</NavDropdown.Item>
                 <NavDropdown.Item href="#action/8.1">Moldes</NavDropdown.Item>
                 <NavDropdown.Divider />
 
-                <NavDropdown.Item href="#action/8.1">Grupos y subgrupo materiales</NavDropdown.Item>
+                <NavDropdown.Item href="#action/8.1">Grupos y subgrupo materiales</NavDropdown.Item> */}
 
               </DropdownSubmenu>
 
               <DropdownSubmenu href="#action/3.7" title="Referencia venta">
 
-                <NavDropdown.Item href="#action/8.1">Colecciones</NavDropdown.Item>
-                <NavDropdown.Item href="#action/8.1">Grupo color</NavDropdown.Item>
-                <NavDropdown.Item href="#action/8.1">Colores venta</NavDropdown.Item>
-                <NavDropdown.Item href="#action/8.1">Talla venta</NavDropdown.Item>
-                <NavDropdown.Item href="#action/8.1">Referencias venta</NavDropdown.Item>
-                <NavDropdown.Item href="#action/8.1">Sku venta</NavDropdown.Item>
-                <NavDropdown.Item href="#action/8.1">Equivalencias</NavDropdown.Item>
+                <NavDropdown.Item as={Link} to={"/maestros-pages/referencia-colecciones"}>Colecciones</NavDropdown.Item>
+                <NavDropdown.Item as={Link} to={"/maestros-pages/referencia-grupo-color"}>Grupo color</NavDropdown.Item>
+                <NavDropdown.Item as={Link} to={"/maestros-pages/referencia-colores-venta"}>Colores venta</NavDropdown.Item>
+                <NavDropdown.Item as={Link} to={"/maestros-pages/referencia-talla-venta"}>Talla venta</NavDropdown.Item>
+                <NavDropdown.Item as={Link} to={"/maestros-pages/referencia-venta"}>Referencias venta</NavDropdown.Item>
+                <NavDropdown.Item as={Link} to={"/maestros-pages/referencia-sku-venta"}>Sku venta</NavDropdown.Item>
+                <NavDropdown.Item as={Link} to={"/maestros-pages/referencia-equivalencias"}>Equivalencias</NavDropdown.Item>
 
               </DropdownSubmenu>
 
