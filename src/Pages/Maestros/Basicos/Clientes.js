@@ -24,11 +24,11 @@ function Clientes() {
       </Button>
       {
         showForm && (
-          <div className='d-flex justify-content-center'>
-            <div className='w-50'>
+          <div className='container-xl d-flex justify-content-center'>
+            {/* <div className=''> */}
               <ClientesForm />
             </div>
-          </div>
+          // </div>
         )}
       <ClientesTable />
 

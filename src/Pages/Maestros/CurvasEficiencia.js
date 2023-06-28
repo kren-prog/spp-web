@@ -1,12 +1,12 @@
 import React from 'react'
-import FamiliaDisenoTable from "../../../Components/FamiliaDiseno/FamiliaDisenoTable";
-import FamiliaDisenoForm from "../../../Components/FamiliaDiseno/FamiliaDisenoForm";
-import BasicModal from '../../../Components/BasicModal';
+import CurvasEficienciaTable from "../../Components/CurvasEficiencia/CurvasEficienciaTable";
+import CurvasEficienciaForm from "../../Components/CurvasEficiencia/CurvasEficienciaForm";
+import BasicModal from '../../Components/BasicModal';
 import { Button } from 'react-bootstrap';
-import { useForm } from '../../../App/useForm';
+import { useForm } from '../../App/useForm';
 import { PlusCircle } from 'react-bootstrap-icons';
 
-function FamiliaDiseno() {
+function CurvasEficiencia() {
 
     const { show, handleClose, handleShow } = useForm();
 
@@ -19,13 +19,13 @@ function FamiliaDiseno() {
             {
                 show && (  
                     <BasicModal handleClose={handleClose} title={"Agregar"}>
-                        <FamiliaDisenoForm />
+                        <CurvasEficienciaForm />
                     </BasicModal>
                 )}
 
-            <FamiliaDisenoTable/>
+            <CurvasEficienciaTable/>
         </>
     )
 }
 
-export default FamiliaDiseno;
+export default CurvasEficiencia;

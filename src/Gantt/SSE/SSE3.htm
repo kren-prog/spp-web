@@ -219,7 +219,7 @@
         }
         const gantt = document.querySelector('#contenedor');
         //drop
-        gantt.addEventListener("dragover", function (event) {
+        gantt.addEventListener("drop", function (event) {
             let otask = null;
             // offset para obtener las coordenadas del mouse relativas al elemento div
             // client para obtener las coordenadas relativas a la ventana del navegador 
@@ -230,15 +230,17 @@
             var pixelData = ActiveGanttJQWCtl1.MathLib.GetRowIndexByPosition(y);
             // Se obtiene un objeto Datetime a partir de la coordenada X
             var dragDate = ActiveGanttJQWCtl1.MathLib.GetDateFromXCoordinate(x);
-            var dtEndDate = new AGJQW.DateTime(2023, 6, 6, 12, 0, 0);
+            
+            var dtEndDate = new AGJQW.DateTime(2023, 6,22, 12, 0, 0);
             // Obtiene el objeto fila sobre el que esta el mouse
-            //var rowKey = ActiveGanttJQWCtl1.Rows.Item(pixelData-1);
-            //console.log(rowKey);
-            // oTask = ActiveGanttJQWCtl1.Tasks.Add("Ensayo", rowKey.mp_sKey, dragDate, dtEndDate, "T" + 6, "", "");
-            // ActiveGanttJQWCtl1.Rows.UpdateTree();
-            // ActiveGanttJQWCtl1.Redraw();
+            var rowKey = ActiveGanttJQWCtl1.Rows.Item(pixelData);
+            console.log(rowKey);
+            oTask = ActiveGanttJQWCtl1.Tasks.Add("Ensayo", rowKey.mp_sKey, dragDate, dtEndDate, "T" + 6, "", "");
+            console.log(oTask);
+            ActiveGanttJQWCtl1.Rows.UpdateTree();
+            ActiveGanttJQWCtl1.Redraw();
 
-            console.log("Fila: " + pixelData + " Fecha: " + dragDate.Day() + '-' + dragDate.Month() + '-' + dragDate.Year() + " " + dragDate.Hour() + " " + dragDate.Minute());
+            //console.log("Fila: " + pixelData + " Fecha: " + dragDate.Day() + '-' + dragDate.Month() + '-' + dragDate.Year() + " " + dragDate.Hour() + " " + dragDate.Minute());
 
         });
     </script>

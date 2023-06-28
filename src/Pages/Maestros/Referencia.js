@@ -1,12 +1,12 @@
 import React from 'react'
-import GrupoTallaTable from "../../../Components/GrupoTalla/GrupoTallaTable";
-import GrupoTallaForm from "../../../Components/GrupoTalla/GrupoTallaForm";
-import BasicModal from '../../../Components/BasicModal';
+import ReferenciaTable from "../../Components/Referencia/ReferenciaTable";
+import ReferenciaForm from "../../Components/Referencia/ReferenciaForm";
+import BasicModal from '../../Components/BasicModal';
 import { Button } from 'react-bootstrap';
-import { useForm } from '../../../App/useForm';
+import { useForm } from '../../App/useForm';
 import { PlusCircle } from 'react-bootstrap-icons';
 
-function GrupoTalla() {
+function Referencia() {
 
     const { show, handleClose, handleShow } = useForm();
 
@@ -19,13 +19,13 @@ function GrupoTalla() {
             {
                 show && (  
                     <BasicModal handleClose={handleClose} title={"Agregar"}>
-                        <GrupoTallaForm />
+                        <ReferenciaForm />
                     </BasicModal>
                 )}
 
-            <GrupoTallaTable/>
+            <ReferenciaForm/>
         </>
     )
 }
 
-export default GrupoTalla;
+export default Referencia;

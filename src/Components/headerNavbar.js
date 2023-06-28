@@ -122,16 +122,16 @@ function HeaderNavbar() {
 
               <DropdownSubmenu href="#action/3.7" title="Especificos">
 
-                <NavDropdown.Item href="#action/8.1">Familia diseño</NavDropdown.Item>
-                <NavDropdown.Item href="#action/8.1">Colores</NavDropdown.Item>
-                <NavDropdown.Item href="#action/8.1">Tallas</NavDropdown.Item>
-                <NavDropdown.Item href="#action/8.1">Grupo Talla</NavDropdown.Item>
+                <NavDropdown.Item href="/maestros-pages/especificos-familia-diseno">Familia diseño</NavDropdown.Item>
+                <NavDropdown.Item as={Link} to="/maestros-pages/especificos-colores">Colores</NavDropdown.Item>
+                <NavDropdown.Item as={Link} to="/maestros-pages/especificos-tallas">Tallas</NavDropdown.Item>
+                <NavDropdown.Item as={Link} to="/maestros-pages/especificos-grupo-talla">Grupo Talla</NavDropdown.Item>
                 {/* <NavDropdown.Item href="#action/8.1">Estampado</NavDropdown.Item>
                 <NavDropdown.Item href="#action/8.1">Bordados</NavDropdown.Item>
                 <NavDropdown.Item href="#action/8.1">Pinta por material</NavDropdown.Item>
                 <NavDropdown.Item href="#action/8.1">Mezcla</NavDropdown.Item> */}
                 <NavDropdown.Divider />
-{/* 
+                {/* 
                 <NavDropdown.Item href="#action/8.1">Piezas</NavDropdown.Item>
                 <NavDropdown.Item href="#action/8.1">Complemento piezas</NavDropdown.Item>
                 <NavDropdown.Item href="#action/8.1">Piezas por familia</NavDropdown.Item>
@@ -154,28 +154,28 @@ function HeaderNavbar() {
 
               </DropdownSubmenu>
 
-              <NavDropdown.Item href="#action/3.1">Referencia</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.1">Curva eficiencia</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.1">Producto</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.1">Pedidos</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.1">Ordenes produccion</NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/maestros-pages/referencia">Referencia</NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/maestros-pages/curvas-eficiencia">Curva eficiencia</NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/maestros-pages/producto">Producto</NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/maestros-pages/pedidos">Pedidos</NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/maestros-pages/ordenes-produccion">Ordenes produccion</NavDropdown.Item>
 
             </NavDropdownMenu>
 
             <Nav.Link href="#pricing">Procesos</Nav.Link>
 
             <NavDropdownMenu href="#action/9.1" title="Programacion" id="collasible-nav-dropdown" className='nav-dropdown'>
-              <NavDropdown.Item as={Link} to={"/"} target="_blank">Programador</NavDropdown.Item>
+              <NavDropdown.Item href="http://127.0.0.1:8080/Gantt/" Target="_blank">Programador</NavDropdown.Item>
             </NavDropdownMenu>
 
             <Nav.Link href="#pricing">Reportes</Nav.Link>
             <Nav.Link href="#pricing">Ayuda</Nav.Link>
           </Nav>
           <Nav>
-            <Nav.Link href="#deets">More deets</Nav.Link>
             <Nav.Link eventKey={2} href="#memes">
               Dank memes
             </Nav.Link>
+            <Nav.Link as={Link} to="/">Login</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>

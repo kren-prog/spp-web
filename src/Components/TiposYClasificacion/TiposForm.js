@@ -1,5 +1,5 @@
 import { BookmarkStarFill } from 'react-bootstrap-icons';
-import { Form, Row, Col, Button } from 'react-bootstrap';
+import { Form, Row, Col, Button, FloatingLabel } from 'react-bootstrap';
 
 function TiposForm() {
   

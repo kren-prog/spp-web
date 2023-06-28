@@ -25,7 +25,18 @@ import GrupoColor from '../Pages/Maestros/ReferenciaVenta/GrupoColor';
 import ReferenciasVenta from '../Pages/Maestros/ReferenciaVenta/ReferenciasVenta';
 import SkuVenta from '../Pages/Maestros/ReferenciaVenta/SkuVenta';
 import TallaVenta from '../Pages/Maestros/ReferenciaVenta/TallaVenta';
+import Colores from '../Pages/Maestros/Especificos/Colores';
+import FamiliaDiseno from '../Pages/Maestros/Especificos/FamiliaDiseno';
+import Tallas from '../Pages/Maestros/Especificos/Tallas';
+import GrupoTalla from '../Pages/Maestros/Especificos/GrupoTalla';
+import CurvasEficiencia from '../Pages/Maestros/CurvasEficiencia';
+import Referencia from '../Pages/Maestros/Referencia';
+import Pedidos from '../Pages/Maestros/Pedidos';
+import Producto from '../Pages/Maestros/Producto';
+import OrdenesProduccion from '../Pages/Maestros/OrdenesProduccion';
 
+import Login from '../Components/Login';
+import NotFound from '../Pages/notFound';
 //const TiposClasificacion = lazy(() => import('../Pages/Maestros/Configuracion/tiposYClasificacion'));
 
 class AppRoutes extends Component {
@@ -55,6 +66,11 @@ class AppRoutes extends Component {
           <Route path="/maestros-pages/basicos-clientes" element={<Clientes/> } />
           <Route path="/maestros-pages/basicos-validaciones" element={<Validaciones/> } />
         
+          <Route path="/maestros-pages/especificos-colores" element={<Colores/> } />
+          <Route path="/maestros-pages/especificos-familia-diseno" element={<FamiliaDiseno/> } />
+          <Route path="/maestros-pages/especificos-tallas" element={<Tallas/> } />
+          <Route path="/maestros-pages/especificos-grupo-talla" element={<GrupoTalla/>} />
+
           <Route path="/maestros-pages/referencia-colecciones" element={<Colecciones/> } />
           <Route path="/maestros-pages/referencia-grupo-color" element={<GrupoColor /> } />
           <Route path="/maestros-pages/referencia-colores-venta" element={<ColoresVenta/> } />
@@ -63,7 +79,15 @@ class AppRoutes extends Component {
           <Route path="/maestros-pages/referencia-sku-venta" element={<SkuVenta/> } />
           <Route path="/maestros-pages/referencia-equivalencias" element={<Equivalencias /> } />
 
-          <Route path="*" element={<p>NOT FOUND</p>} />
+          <Route path="/maestros-pages/referencia" element={<Referencia/> } />
+          <Route path="/maestros-pages/curvas-eficiencia" element={<CurvasEficiencia/> } />
+          <Route path="/maestros-pages/producto" element={<Producto/> } />
+          <Route path="/maestros-pages/pedidos" element={<Pedidos/> } />
+          <Route path="/maestros-pages/ordenes-produccion" element={<OrdenesProduccion/> } />
+
+          <Route path="/" element={<Login/> } />
+
+          <Route path="*" element={<NotFound/>} />
 
         </Routes>
       // </HashRouter>

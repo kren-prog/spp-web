@@ -32,9 +32,9 @@ function BasicModal({ children, handleClose, title }) {
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>
-                        Close
+                        Cerrar
                     </Button>
-                    <Button variant="primary">Understood</Button>
+                    
                 </Modal.Footer>
             </Modal>
         </>
