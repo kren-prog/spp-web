@@ -3,16 +3,20 @@ import { Form, Container, Button, Card, Image, InputGroup, FormControl } from "r
 import { KeyFill, PersonFill, Eye, EyeSlash } from "react-bootstrap-icons";
 import svgI from "../assets/images/astronaut.svg";
 import { useNavigate } from 'react-router-dom';
+import { AuthContext } from './AuthContext';
 
 function Login() {
     const navigate = useNavigate();
+    const [name, setName] = React.useState('');
     const [showPassword, setShowPassword] = React.useState(false);
     const [showEye, setShowEye] = React.useState(false);
+    const authContext = React.useContext(AuthContext);
 
     const login = (e) => {
         e.preventDefault();
         navigate('/maestros-pages/configuracion-tipos');
-      };
+        authContext.updateUser(name);
+    };
 
     const handleChange = (event) => {
         if (event.target.value !== "") {
@@ -47,10 +51,13 @@ function Login() {
                         <InputGroup className="my-3">
                             <InputGroup.Text id="basic-addon1"><PersonFill /></InputGroup.Text>
                             <Form.Control
-                                placeholder="Username"
+                                className="shadow-none"
+                                placeholder="Usuario"
                                 aria-label="Username"
                                 aria-describedby="basic-addon1"
-                               
+                                value={name}
+                                onChange={(e) => setName(e.target.value)}
+                                autoFocus
                             />
                         </InputGroup>
 
@@ -60,7 +67,7 @@ function Login() {
                                 <Form.Control
                                     type={showPassword ? "text" : "password"}
                                     className="shadow-none pr-4"
-                                    placeholder="Password"
+                                    placeholder="Contraseña"
                                     onChange={handleChange}
                                 />
                                 <Button
@@ -81,7 +88,7 @@ function Login() {
                         </InputGroup>
 
 
-                        <Button type="submit" variant="primary" className='w-75 mt-2'>Login</Button>
+                        <Button type="submit" variant="primary" className='w-75 mt-2'>Iniciar sesion</Button>
                     </Form>
                 </Card.Body>
             </Card>

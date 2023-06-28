@@ -1,5 +1,6 @@
 import React, { Component} from 'react'; //lazy
 import { Routes, Route } from 'react-router-dom';
+import HeaderNavbar from '../Components/HeaderNavbar';
 import TiposYClasificacion from '../Pages/Maestros/Configuracion/TiposYClasificacion';
 import ConfiguracionOpcional from '../Pages/Maestros/Configuracion/ConfiguracionOpcional';
 import ConfiguracionColor from '../Pages/Maestros/Configuracion/ConfiguracionColor';
@@ -44,7 +45,7 @@ class AppRoutes extends Component {
     return (
       // <HashRouter>
         <Routes>
-          {/* <Route exact path="/dashboard" component={ Dashboard } /> */}
+           <Route path="/" component={ <HeaderNavbar/> } /> 
 
           <Route path="/maestros-pages/configuracion-tipos" element={<TiposYClasificacion/> } />
           <Route path="/maestros-pages/configuracion-opcional" element={<ConfiguracionOpcional/> } />
@@ -85,7 +86,7 @@ class AppRoutes extends Component {
           <Route path="/maestros-pages/pedidos" element={<Pedidos/> } />
           <Route path="/maestros-pages/ordenes-produccion" element={<OrdenesProduccion/> } />
 
-          <Route path="/" element={<Login/> } />
+          <Route path="/login" element={<Login/> } />
 
           <Route path="*" element={<NotFound/>} />
 

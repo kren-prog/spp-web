@@ -6,9 +6,14 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import { DropdownSubmenu, NavDropdownMenu } from "react-bootstrap-submenu";
 import "react-bootstrap-submenu/dist/index.css";
 import "../assets/styles/headerNavbar.css"
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
+import { AuthContext } from './AuthContext';
+import Logout from './Logout';
 
 function HeaderNavbar() {
+  const authContext = React.useContext(AuthContext);
+  const { state } = useLocation();
+  console.log(authContext.user);
 
   const routesConfig = [{
     to: '/maestros-pages/configuracion-tipos',
@@ -88,6 +93,8 @@ function HeaderNavbar() {
         <Navbar.Brand href="#home">SPP Web</Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
+        {authContext?.logged ? 
+          <>
           <Nav className="me-auto">
 
             <Nav.Link href="#features" >Modulos</Nav.Link>
@@ -111,7 +118,7 @@ function HeaderNavbar() {
               <DropdownSubmenu href="#action/3.7" title="Basicos">
 
                 {routesBasic.map((item) => (
-                  <div key={item.to}>
+                  <div key={item.text}>
                     {item.text === 'DIVIDER' ? <NavDropdown.Divider /> : <NavDropdown.Item className='' as={Link} to={item.to}>
                       {item.text}
                     </NavDropdown.Item>}
@@ -171,12 +178,24 @@ function HeaderNavbar() {
             <Nav.Link href="#pricing">Reportes</Nav.Link>
             <Nav.Link href="#pricing">Ayuda</Nav.Link>
           </Nav>
+
+    
+          <Nav>
+            <Nav.Link eventKey={2} href="#memes" className='fw-bold text-white'>
+              {authContext.user}
+            </Nav.Link>
+            <Nav.Link> <Logout/> </Nav.Link>
+          </Nav>
+          </>
+           : (
           <Nav>
             <Nav.Link eventKey={2} href="#memes">
-              Dank memes
+              Register
             </Nav.Link>
-            <Nav.Link as={Link} to="/">Login</Nav.Link>
+            <Nav.Link as={Link} to="/login">Login</Nav.Link>
           </Nav>
+          )}
+
         </Navbar.Collapse>
       </Container>
     </Navbar>

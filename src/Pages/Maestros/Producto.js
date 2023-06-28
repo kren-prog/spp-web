@@ -140,7 +140,7 @@ function Producto() {
                 </Row>
 
                 <Row>
-                    <Col xs={12} md={6} lg={4} xl={4} xxl={6} className='mb-3'>
+                    <Col xs={12} md={8} lg={6} xl={6} xxl={6} className='mb-3'>
                         <InputGroup size="sm" className="mb-3">
                             <InputGroup.Text id="inputGroup-sizing-sm" className='fw-bold'>Descripcion</InputGroup.Text>
                             <Form.Control
@@ -149,7 +149,7 @@ function Producto() {
                             />
                         </InputGroup>
                     </Col>
-                    <Col xs={12} md={6} lg={4} xl={4} xxl={6} className='mb-3'>
+                    <Col xs={12} md={7} lg={6} xl={6} xxl={6} className='mb-3'>
                         <InputGroup size="sm" className="mb-3">
                             <InputGroup.Text id="inputGroup-sizing-sm" className='fw-bold'>D corta/Alias</InputGroup.Text>
                             <Form.Control
