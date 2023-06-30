@@ -36,7 +36,8 @@ function ConsecutivoTable() {
 
     return (
         <>
-            <Table striped bordered hover responsive size="sm">
+          <div className="table-responsive-lg">
+            <Table striped bordered hover size="sm" className="table-auto">
                 <thead>
                     <tr>
                         <th>Identificador</th>
@@ -91,7 +92,7 @@ function ConsecutivoTable() {
 
                 </tbody>
             </Table>
-
+            </div>
             <div className='d-flex justify-content-center'>
                 <BasicPaginate totalPages={totalPages} handlePageClick={handlePageClick} />
             </div>
