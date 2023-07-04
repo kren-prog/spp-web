@@ -1,43 +1,69 @@
 import React from 'react';
-import { Table } from 'react-bootstrap';
+import { Table, Row } from 'react-bootstrap';
 import { Pencil } from 'react-bootstrap-icons';
 import SweetAlert from '../SweetAlert';
 import { useForm } from '../../App/useForm';
 import TiposForm from './TiposForm';
 import BasicModal from '../BasicModal';
 import BasicPaginate from '../BasicPaginate';
+import SearchBar from '../SearchBar';
+import ItemsPerPage from '../ItemsPerPage';
 
 function TableTipos() {
-    const { show, handleClose, handleShow } = useForm();
 
-    const [alertResponse, setAlertResponse] = React.useState(null);
-    const itemsPerPage = 5;
-    const [currentPage, setCurrentPage] = React.useState(1);
-    const totalPages = Math.ceil(50 / itemsPerPage); // data.length
+    const { show, handleClose, handleShow, searchTerm, handleSearch, numberOfRows, itemsPerPage, handleChangeItems, alertResponse, handleAlertResponse } = useForm();
 
-    const handleAlertResponse = (response) => {
-        setAlertResponse(response);
-    };
+    const [currentPage, setCurrentPage] = React.useState(0);
 
     function handlePageClick({ selected: selectedPage }) {
         setCurrentPage(selectedPage);
     }
 
-    const data = [
-        { code: 1, tc: 'John', te: 25, description: "Lorep ipsum sit amet dolore", sequence: 3, n1: 1, n2: 1, n3: 1, n4: 1, c1: 2, c2: 2, c3: 2, c4: 4 },
-        { code: 2, tc: 'Manu', te: 22, description: "Lorep ipsum sit amet dolore", sequence: 2, n1: 1, n2: 1, n3: 1, n4: 1, c1: 2, c2: 2, c3: 2, c4: 4 },
-        { code: 3, tc: 'Kim', te: 20, description: "Lorep ipsum sit amet dolore", sequence: 5, n1: 1, n2: 1, n3: 1, n4: 1, c1: 2, c2: 2, c3: 2, c4: 4 },
-        { code: 4, tc: 'Rob', te: 15, description: "Lorep ipsum sit amet dolore", sequence: 1, n1: 1, n2: 1, n3: 1, n4: 1, c1: 2, c2: 2, c3: 2, c4: 4 },
-        // Agrega más objetos de datos aquí...
-    ];
-    const startIndex = (currentPage - 1) * itemsPerPage;
+    const data = Array.from({ length: 40 }, (_, index) => ({
+        code: index + 1,
+        tc: `cadena ${index + 1}`,
+        te: index,
+        description: `description${index} description${index + 1} `,
+        sequence: index,
+        n1: index,
+        n2: index,
+        n3: index,
+        n4: index,
+        c1: index,
+        c2: index,
+        c3: index,
+        c4: index
+    }));
+
+    const totalPages = Math.ceil(data.length / itemsPerPage); // data.length
+
+    const startIndex = currentPage * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
     const currentData = data.slice(startIndex, endIndex);
+
+    const filteredData2 = currentData.filter((item) =>
+        item.tc.toLowerCase().includes(searchTerm.toLowerCase()));
+
+    // Filtrar los datos basados en el término de búsqueda en cualquier campo
+    const filteredData = currentData.filter((item) =>
+        Object.values(item).some(
+            (value) =>
+                typeof value === 'string' &&
+                value.toLowerCase().includes(searchTerm.toLowerCase())
+        )
+    );
 
 
     return (
         <>
-            <Table striped bordered hover responsive size="sm">
+            <Row>
+                <SearchBar searchTerm={searchTerm} handleSearch={handleSearch} />
+
+                <ItemsPerPage handleChangeItems={handleChangeItems} numberOfRows={numberOfRows} />
+            </Row>
+
+            <Table striped bordered hover responsive size="sm" className='table-condensed'>
+
                 <thead>
                     <tr>
                         <th> Codigo</th>
@@ -58,7 +84,7 @@ function TableTipos() {
                 </thead>
                 <tbody>
 
-                    {currentData.map((item) => (
+                    {filteredData.map((item) => (
                         <tr key={item.code}>
                             <td>{item.code}</td>
                             <td>{item.tc}</td>

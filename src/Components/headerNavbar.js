@@ -189,10 +189,10 @@ function HeaderNavbar() {
           </>
            : (
           <Nav>
-            <Nav.Link eventKey={2} href="#memes">
+            <Nav.Link as={Link} to="/register">
               Register
             </Nav.Link>
-            <Nav.Link as={Link} to="/login">Login</Nav.Link>
+            <Nav.Link as={Link} to="/">Login</Nav.Link>
           </Nav>
           )}
 

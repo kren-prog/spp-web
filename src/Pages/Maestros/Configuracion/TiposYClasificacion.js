@@ -13,7 +13,7 @@ function TiposYClasificacion() {
     return (
         <>
             <Container>
-                <Button variant="warning" className='btn btn-sm m-2 fw-bold text-white' onClick={handleShow}>
+                <Button variant="warning" className='btn btn-sm mb-2 fw-bold text-white' onClick={handleShow}>
                     Añadir  <PlusCircle color="white" size={18} title="Add" />
                 </Button>
                 <Row>

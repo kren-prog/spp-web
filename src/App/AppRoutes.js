@@ -45,7 +45,7 @@ class AppRoutes extends Component {
     return (
       // <HashRouter>
         <Routes>
-           <Route path="/" component={ <HeaderNavbar/> } /> 
+           <Route path="/nv" component={ <HeaderNavbar/> } /> 
 
           <Route path="/maestros-pages/configuracion-tipos" element={<TiposYClasificacion/> } />
           <Route path="/maestros-pages/configuracion-opcional" element={<ConfiguracionOpcional/> } />
@@ -86,7 +86,7 @@ class AppRoutes extends Component {
           <Route path="/maestros-pages/pedidos" element={<Pedidos/> } />
           <Route path="/maestros-pages/ordenes-produccion" element={<OrdenesProduccion/> } />
 
-          <Route path="/login" element={<Login/> } />
+          <Route path="/" element={<Login/> } />
 
           <Route path="*" element={<NotFound/>} />
 
