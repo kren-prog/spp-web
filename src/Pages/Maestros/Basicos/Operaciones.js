@@ -24,7 +24,7 @@ function Operaciones() {
           </BasicModal>
         )}
       <div className='d-flex justify-content-center'>
-        <div className='w-50'>
+        <div className='w-75'>
    {/*    <MiTabla/> */}
         <OperacionesTable/>
         </div>

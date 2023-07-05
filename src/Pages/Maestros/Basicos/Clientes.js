@@ -1,36 +1,34 @@
 import React from 'react'
-import { Button } from 'react-bootstrap';
+import { Button, Col, Row, Container } from 'react-bootstrap';
 import { PlusCircle } from 'react-bootstrap-icons';
 import ClientesForm from '../../../Components/Clientes/ClientesForm';
 import ClientesTable from '../../../Components/Clientes/ClientesTable';
+import { useForm } from '../../../App/useForm';
+import BasicModal from '../../../Components/BasicModal';
 
 function Clientes() {
-  // Operacion proceso por referencia
-  const [showForm, setShowForm] = React.useState(false);
-  const [variant, setVariant] = React.useState('warning');
-  const [btntxt, setBtntxt] = React.useState('Añadir');
 
-  const handleShowForm = () => {
-    setShowForm(!showForm);
-    variant === 'warning' ? setVariant('secondary') : setVariant('warning');
-    btntxt === 'Añadir' ? setBtntxt('CANCEL') : setBtntxt('Añadir');
-  };
+  const { show, handleClose, handleShow } = useForm();
 
   return (
     <>
+      <Container>
+        <Button variant="warning" className='btn btn-sm mb-2 fw-bold text-white' onClick={handleShow}>
+          Añadir  <PlusCircle color="white" size={18} title="Add" />
+        </Button>
+        <Row>
+          <Col>
+            <ClientesTable />
+          </Col>
+        </Row>
+      </Container>
 
-      <Button variant={variant} className='btn btn-sm m-2 fw-bold text-white' onClick={handleShowForm}>
-        {btntxt}  <PlusCircle color="white" size={18} title="Add" />
-      </Button>
       {
-        showForm && (
-          <div className='container-xl d-flex justify-content-center'>
-            {/* <div className=''> */}
-              <ClientesForm />
-            </div>
-          // </div>
+        show && (
+          <BasicModal handleClose={handleClose} title={"Agregar"}>
+            <ClientesForm />
+          </BasicModal>
         )}
-      <ClientesTable />
 
     </>
   )

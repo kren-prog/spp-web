@@ -28,7 +28,8 @@ function CentroTable() {
     const currentData = data.slice(startIndex, endIndex);
 
     return (
-        <>
+        <> 
+        
             <Table striped bordered hover responsive size="sm" className='mt-3'>
                 <thead>
                     <tr>

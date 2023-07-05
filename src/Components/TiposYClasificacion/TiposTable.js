@@ -39,19 +39,21 @@ function TableTipos() {
 
     const startIndex = currentPage * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
-    const currentData = data.slice(startIndex, endIndex);
-
-    const filteredData2 = currentData.filter((item) =>
-        item.tc.toLowerCase().includes(searchTerm.toLowerCase()));
 
     // Filtrar los datos basados en el término de búsqueda en cualquier campo
-    const filteredData = currentData.filter((item) =>
+    const filteredData = data.filter((item) =>
         Object.values(item).some(
             (value) =>
                 typeof value === 'string' &&
                 value.toLowerCase().includes(searchTerm.toLowerCase())
         )
     );
+
+    const currentData = filteredData.slice(startIndex, endIndex);
+
+    // filtrar por un campo en especifico
+    const filteredData2 = currentData.filter((item) =>
+        item.tc.toLowerCase().includes(searchTerm.toLowerCase()));
 
 
     return (
@@ -84,21 +86,21 @@ function TableTipos() {
                 </thead>
                 <tbody>
 
-                    {filteredData.map((item) => (
+                    {currentData.map((item) => (
                         <tr key={item.code}>
                             <td>{item.code}</td>
                             <td>{item.tc}</td>
-                            <td>{item.te}</td>
+                            <td className='text-center'>{item.te}</td>
                             <td>{item.description}</td>
-                            <td>{item.sequence}</td>
-                            <td>{item.n1}</td>
-                            <td>{item.n2}</td>
-                            <td>{item.n3}</td>
-                            <td>{item.n4}</td>
-                            <td>{item.c1}</td>
-                            <td>{item.c2}</td>
-                            <td>{item.c3}</td>
-                            <td>{item.c4}</td>
+                            <td className='text-center'>{item.sequence}</td>
+                            <td className='text-center'>{item.n1}</td>
+                            <td className='text-center'>{item.n2}</td>
+                            <td className='text-center'>{item.n3}</td>
+                            <td className='text-center'>{item.n4}</td>
+                            <td className='text-center'>{item.c1}</td> 
+                            <td className='text-center'>{item.c2}</td>
+                            <td className='text-center'>{item.c3}</td>
+                            <td className='text-center'>{item.c4}</td>
                             <td className="fixed-column">
                                 <div className="d-flex p-2">
                                     <span onClick={handleShow} style={{ cursor: 'pointer' }}>

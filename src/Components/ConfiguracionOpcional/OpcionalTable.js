@@ -1,44 +1,60 @@
 import React from 'react'
-import { Table } from 'react-bootstrap';
-import { Pencil } from 'react-bootstrap-icons';
+import { Table, Row } from 'react-bootstrap';
+import { Filter, Pencil } from 'react-bootstrap-icons';
 import { useForm } from '../../App/useForm';
 import SweetAlert from '../SweetAlert';
 import BasicPaginate from '../BasicPaginate';
 import BasicModal from '../BasicModal';
 import OpcionalForm from './OpcionalForm';
+import SearchBar from '../SearchBar';
+import ItemsPerPage from '../ItemsPerPage';
 
 function OpcionalTable() {
-    const { show, handleClose, handleShow } = useForm();
-    const [alertResponse, setAlertResponse] = React.useState(null);
-    const itemsPerPage = 5;
-    const [currentPage, setCurrentPage] = React.useState(1);
-    const totalPages = Math.ceil(50 / itemsPerPage); // data.length
 
-    const handleAlertResponse = (response) => {
-        setAlertResponse(response);
-    };
+    const { show, handleClose, handleShow, searchTerm, handleSearch, numberOfRows, itemsPerPage, handleChangeItems, alertResponse, handleAlertResponse } = useForm();
+
+    const [currentPage, setCurrentPage] = React.useState(1);
 
     function handlePageClick({ selected: selectedPage }) {
         setCurrentPage(selectedPage);
     }
 
-    const data = [
-        { code: 1, tc: 'CUENTO', cc: 0, description: "SIN ASIGNAR ", sequence: 3, n1: 1, n2: 1, n3: 1, c1: 2, c2: 2, c3: 2 },
-        { code: 2, tc: 'CUENTO', cc: 1, description: "BMX", sequence: 2, n1: 1, n2: 1, n3: 1, c1: 2, c2: 2, c3: 2 },
-        { code: 3, tc: 'CUENTO', cc: 2, description: "CICLISMO", sequence: 5, n1: 1, n2: 1, n3: 1, c1: 2, c2: 2, c3: 2 },
-        { code: 4, tc: 'LINEA', cc: 3, description: "EVENTOS", sequence: 1, n1: 1, n2: 1, n3: 1, c1: 2, c2: 2, c3: 2 },
-        { code: 5, tc: 'LINEA', cc: 3, description: "LIFE STYLE", sequence: 1, n1: 1, n2: 1, n3: 1, c1: 2, c2: 2, c3: 2 },
-        { code: 6, tc: 'LINEA', cc: 3, description: "URBAN", sequence: 1, n1: 1, n2: 1, n3: 1, c1: 2, c2: 2, c3: 2 },
-        { code: 7, tc: 'LINEA', cc: 3, description: "PATINAJE", sequence: 1, n1: 1, n2: 1, n3: 1, c1: 2, c2: 2, c3: 2 },
-        { code: 8, tc: 'LINEA', cc: 3, description: "PRESENTACION", sequence: 1, n1: 1, n2: 1, n3: 1, c1: 2, c2: 2, c3: 2 },
-        // Agrega más objetos de datos aquí...
-    ];
+    const data = Array.from({ length: 25 }, (_, index) => ({
+        code: index + 1,
+        tc: `CUENTO ${index + 1}`,
+        CC: index,
+        description: `description${index} description${index + 1} `,
+        sequence: index,
+        n1: index,
+        n2: index,
+        n3: index,
+        c1: index,
+        c2: index,
+        c3: index
+    }));
+    
+    const totalPages = Math.ceil(data.length / itemsPerPage); // data.length
+
     const startIndex = (currentPage - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
-    const currentData = data.slice(startIndex, endIndex);
+
+    const filteredData = data.filter((item) =>
+        Object.values(item).some(
+            (value) =>
+                typeof value === 'string' &&
+                value.toLowerCase().includes(searchTerm.toLowerCase())
+        )
+    );
+
+    const currentData = filteredData.slice(startIndex, endIndex);
 
     return (
         <>
+            <Row>
+                <SearchBar searchTerm={searchTerm} handleSearch={handleSearch} />
+
+                <ItemsPerPage handleChangeItems={handleChangeItems} numberOfRows={numberOfRows} />
+            </Row>
             <Table striped bordered hover responsive size="sm">
                 <thead>
                     <tr>
@@ -62,15 +78,15 @@ function OpcionalTable() {
                             <td>{item.tc}</td>
                             <td>{item.cc}</td>
                             <td>{item.description}</td>
-                            <td>{item.sequence}</td>
-                            <td>{item.n1}</td>
-                            <td>{item.n2}</td>
-                            <td>{item.n3}</td>
-                            <td>{item.c1}</td>
-                            <td>{item.c2}</td>
-                            <td>{item.c3}</td>
+                            <td className='text-center'>{item.sequence}</td>
+                            <td className='text-center'>{item.n1}</td>
+                            <td className='text-center'>{item.n2}</td>
+                            <td className='text-center'>{item.n3}</td>
+                            <td className='text-center'>{item.c1}</td>
+                            <td className='text-center'>{item.c2}</td>
+                            <td className='text-center'>{item.c3}</td>
                             <td className="fixed-column">
-                            <div className="d-flex p-2">
+                                <div className="d-flex p-2">
                                     <span onClick={handleShow} style={{ cursor: 'pointer' }}>
                                         <Pencil color="royalblue" size={24} title="Editar" />
                                     </span>

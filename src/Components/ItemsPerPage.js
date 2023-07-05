@@ -3,7 +3,7 @@ import { Form, Col, InputGroup } from 'react-bootstrap';
 
 function ItemsPerPage({handleChangeItems, numberOfRows}) {
     return (
-        <Form.Group controlId="tipoc" as={Col} md={4} lg={2} xl={2}>
+        <Form.Group controlId="tipoc" as={Col} sm={5} md={4} lg={2} xl={2}>
             <InputGroup size="sm" className="mb-2">
 
                 <InputGroup.Text className='fw-bold'>Cant. mostrar</InputGroup.Text>

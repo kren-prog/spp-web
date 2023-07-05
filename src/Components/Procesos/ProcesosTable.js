@@ -1,41 +1,50 @@
 import React from 'react'
-import { Table } from 'react-bootstrap';
+import { Table, Row } from 'react-bootstrap';
 import { Pencil } from 'react-bootstrap-icons';
 import SweetAlert from '../SweetAlert';
 import { useForm } from '../../App/useForm';
 import BasicModal from '../BasicModal';
 import BasicPaginate from '../BasicPaginate';
 import ProcesosForm from './ProcesosForm';
+import SearchBar from '../SearchBar';
+import ItemsPerPage from '../ItemsPerPage';
 
 function ProcesosTable() {
-    const { show, handleClose, handleShow } = useForm();
-    const [alertResponse, setAlertResponse] = React.useState(null);
 
-    const itemsPerPage = 5;
-    const [currentPage, setCurrentPage] = React.useState(1);
-    const totalPages = Math.ceil(50 / itemsPerPage); // data.length
+  const { show, handleClose, handleShow, searchTerm, handleSearch, numberOfRows, itemsPerPage, handleChangeItems, alertResponse, handleAlertResponse } = useForm();
+  
+  const [currentPage, setCurrentPage] = React.useState(1);
+  const totalPages = Math.ceil(50 / itemsPerPage); // data.length
 
-    const handleAlertResponse = (response) => {
-        setAlertResponse(response);
-    };
+  function handlePageClick({ selected: selectedPage }) {
+    setCurrentPage(selectedPage);
+  }
 
-    function handlePageClick({ selected: selectedPage }) {
-        setCurrentPage(selectedPage);
-    }
+  const data = [
+    { code: 1, description: 'Prendas', razon: 1, nit: 'M2', representante: 1, direccion1: "abc", direccion2: "def", telefono1: "8884422", telefono2: "3145650545", fax: 57, pais: "colombia", departamento: "Antioquia", municipio: "Rio negro", url: "", email: "" },
+    { code: 2, description: 'Dias', razon: 1440, nit: 'Minuto', representante: 0, direccion1: "abc", direccion2: "def", telefono1: "8884422", telefono2: "3145650545", fax: 57, pais: "colombia", departamento: "Antioquia", municipio: "Rio negro", url: "", email: "" },
+    { code: 3, description: 'Horas', razon: 60, nit: 'Prendas', representante: 1, direccion1: "abc", direccion2: "def", telefono1: "8884422", telefono2: "3145650545", fax: 57, pais: "colombia", departamento: "Antioquia", municipio: "Rio negro", url: "", email: "" },
+  ];
 
-    const data = [
-        { code: 1, description: 'Prendas', razon: 1, nit: 'M2', representante: 1, direccion1: "abc", direccion2: "def", telefono1: "8884422", telefono2: "3145650545", fax: 57, pais: "colombia", departamento: "Antioquia", municipio: "Rio negro", url: "", email: "" },
-        { code: 2, description: 'Dias', razon: 1440, nit: 'Minuto', representante: 0, direccion1: "abc", direccion2: "def", telefono1: "8884422", telefono2: "3145650545", fax: 57, pais: "colombia", departamento: "Antioquia", municipio: "Rio negro", url: "", email: "" },
-        { code: 3, description: 'Horas', razon: 60, nit: 'Prendas', representante: 1, direccion1: "abc", direccion2: "def", telefono1: "8884422", telefono2: "3145650545", fax: 57, pais: "colombia", departamento: "Antioquia", municipio: "Rio negro", url: "", email: "" },
-      ];
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const filteredData = data.filter((item) =>
+        Object.values(item).some(
+            (value) =>
+                typeof value === 'string' &&
+                value.toLowerCase().includes(searchTerm.toLowerCase())
+        )
+    );
+  const currentData = filteredData.slice(startIndex, endIndex);
 
-    const startIndex = (currentPage - 1) * itemsPerPage;
-    const endIndex = startIndex + itemsPerPage;
-    const currentData = data.slice(startIndex, endIndex);
+  return (
+    <>
+      <Row>
+        <SearchBar searchTerm={searchTerm} handleSearch={handleSearch} />
 
-    return (
-        <>
-         <Table striped bordered hover responsive size="sm" className='mt-3'>
+        <ItemsPerPage handleChangeItems={handleChangeItems} numberOfRows={numberOfRows} />
+      </Row>
+      <Table striped bordered hover responsive size="sm" className='mt-3'>
         <thead>
           <tr>
             <th>Codigo</th>
@@ -93,24 +102,24 @@ function ProcesosTable() {
               <td>{item.email}</td>
               <td className="fixed-column">
                 <div className="d-flex p-2">
-                <span onClick={handleShow} style={{ cursor: 'pointer' }}>
-                                        <Pencil color="royalblue" size={24} title="Editar" />
-                                    </span>
-                        
-                                    {
-                                        show && (
-                                            <BasicModal handleClose={handleClose} title={"Editar"}>
-                                               <ProcesosForm/>
-                                            </BasicModal>
-                                        )}
+                  <span onClick={handleShow} style={{ cursor: 'pointer' }}>
+                    <Pencil color="royalblue" size={24} title="Editar" />
+                  </span>
 
-                                    <SweetAlert onAlertResponse={handleAlertResponse}
-                                        title="Esta seguro?"
-                                        text="Se eliminara el item."
-                                        icon="warning"
-                                        typebtn="delete"
-                                    />
-                                    <p> {alertResponse}</p>
+                  {
+                    show && (
+                      <BasicModal handleClose={handleClose} title={"Editar"}>
+                        <ProcesosForm />
+                      </BasicModal>
+                    )}
+
+                  <SweetAlert onAlertResponse={handleAlertResponse}
+                    title="Esta seguro?"
+                    text="Se eliminara el item."
+                    icon="warning"
+                    typebtn="delete"
+                  />
+                  <p> {alertResponse}</p>
                 </div>
               </td>
             </tr>
@@ -118,12 +127,12 @@ function ProcesosTable() {
 
         </tbody>
       </Table>
-           
-            <div className='d-flex justify-content-center'>
-                <BasicPaginate totalPages={totalPages} handlePageClick={handlePageClick} />
-            </div>
-        </>
-    )
+
+      <div className='d-flex justify-content-center'>
+        <BasicPaginate totalPages={totalPages} handlePageClick={handlePageClick} />
+      </div>
+    </>
+  )
 }
 
 export default ProcesosTable

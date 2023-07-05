@@ -129,7 +129,7 @@ function HeaderNavbar() {
 
               <DropdownSubmenu href="#action/3.7" title="Especificos">
 
-                <NavDropdown.Item href="/maestros-pages/especificos-familia-diseno">Familia diseño</NavDropdown.Item>
+                <NavDropdown.Item as={Link} to="/maestros-pages/especificos-familia-diseno">Familia diseño</NavDropdown.Item>
                 <NavDropdown.Item as={Link} to="/maestros-pages/especificos-colores">Colores</NavDropdown.Item>
                 <NavDropdown.Item as={Link} to="/maestros-pages/especificos-tallas">Tallas</NavDropdown.Item>
                 <NavDropdown.Item as={Link} to="/maestros-pages/especificos-grupo-talla">Grupo Talla</NavDropdown.Item>

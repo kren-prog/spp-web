@@ -4,11 +4,6 @@
     background-color: #fff;
   }
   
-  .fixed-column {
-    position: sticky;
-    right: 0;
-    background-color: #fff;
-  }
   
   .table-condensed {
     font-size: 14px;
