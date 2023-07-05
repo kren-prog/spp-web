@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/spp-web/build/static/css/main.e44810fc.css",
-    "main.js": "/spp-web/build/static/js/main.18985521.js",
-    "static/js/787.49b23ee4.chunk.js": "/spp-web/build/static/js/787.49b23ee4.chunk.js",
-    "static/media/404.svg": "/spp-web/build/static/media/404.67bf2844dc96a568ff9bd533b869233c.svg",
-    "static/media/astronaut.svg": "/spp-web/build/static/media/astronaut.f03a623b0a0785af68937ae4e87d2c12.svg",
-    "index.html": "/spp-web/build/index.html",
-    "main.e44810fc.css.map": "/spp-web/build/static/css/main.e44810fc.css.map",
-    "main.18985521.js.map": "/spp-web/build/static/js/main.18985521.js.map",
-    "787.49b23ee4.chunk.js.map": "/spp-web/build/static/js/787.49b23ee4.chunk.js.map"
+    "main.css": "/spp-web/static/css/main.e44810fc.css",
+    "main.js": "/spp-web/static/js/main.9ef2d809.js",
+    "static/js/787.49b23ee4.chunk.js": "/spp-web/static/js/787.49b23ee4.chunk.js",
+    "static/media/404.svg": "/spp-web/static/media/404.67bf2844dc96a568ff9bd533b869233c.svg",
+    "static/media/astronaut.svg": "/spp-web/static/media/astronaut.f03a623b0a0785af68937ae4e87d2c12.svg",
+    "index.html": "/spp-web/index.html",
+    "main.e44810fc.css.map": "/spp-web/static/css/main.e44810fc.css.map",
+    "main.9ef2d809.js.map": "/spp-web/static/js/main.9ef2d809.js.map",
+    "787.49b23ee4.chunk.js.map": "/spp-web/static/js/787.49b23ee4.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.e44810fc.css",
-    "static/js/main.18985521.js"
+    "static/js/main.9ef2d809.js"
   ]
 }
