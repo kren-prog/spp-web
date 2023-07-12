@@ -88,7 +88,7 @@ function Equivalencias() {
                     icon="warning"
                     typebtn="delete"
                   />
-                  <p> {alertResponse}</p>
+             
                 </div>
               </td>
             </tr>

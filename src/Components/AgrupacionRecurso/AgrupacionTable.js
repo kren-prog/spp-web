@@ -94,13 +94,13 @@ function AgrupacionTable() {
                                         icon="warning"
                                         typebtn="delete"
                                     />
-                                    <p> {alertResponse}</p>
+                                     {/* <p> {alertResponse}</p> */}
                                 </div>
                             </td>
                         </tr>
                     ))}
 
-                </tbody>
+                </tbody> 
             </Table>
 
             <div className='d-flex justify-content-center'>

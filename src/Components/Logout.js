@@ -18,7 +18,7 @@ function Logout() {
     const onLogout = () => {
         setShow(false);
         authContext.updateUser(null);
-        navigate('/login');
+        navigate('/');
     };
 
     return (

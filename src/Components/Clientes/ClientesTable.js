@@ -101,7 +101,7 @@ function ClientesTable() {
                                         icon="warning"
                                         typebtn="delete"
                                     />
-                                    <p> {alertResponse}</p>
+                                     {/* <p> {alertResponse}</p> */}
 
                                 </div>
                             </td>

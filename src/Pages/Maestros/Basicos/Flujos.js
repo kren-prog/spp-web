@@ -82,7 +82,7 @@ function Flujos() {
                                         icon="warning"
                                         typebtn="delete"
                                     />
-                                    <p> {alertResponse}</p> */}
+                                 */}
                 </div>
               </td>
             </tr>
@@ -122,7 +122,7 @@ function Flujos() {
                                         icon="warning"
                                         typebtn="delete"
                                     />
-                                    <p> {alertResponse}</p> */}
+                                   */}
                 </div>
               </td>
             </tr>

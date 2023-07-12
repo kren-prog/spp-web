@@ -95,7 +95,7 @@ function ConsecutivoTable() {
                                             icon="warning"
                                             typebtn="delete"
                                         />
-                                        <p> {alertResponse}</p>
+                                         {/* <p> {alertResponse}</p> */}
                                     </div>
                                 </td>
                             </tr>
