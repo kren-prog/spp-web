@@ -1,19 +1,24 @@
 {
   "files": {
     "main.css": "/spp-web/static/css/main.e44810fc.css",
-    "main.js": "/spp-web/static/js/main.76230062.js",
+    "main.js": "/spp-web/static/js/main.033fbec8.js",
+    "static/css/903.a063e20f.chunk.css": "/spp-web/static/css/903.a063e20f.chunk.css",
+    "static/js/903.b7e4316b.chunk.js": "/spp-web/static/js/903.b7e4316b.chunk.js",
     "static/js/752.ad7a7bcc.chunk.js": "/spp-web/static/js/752.ad7a7bcc.chunk.js",
     "static/js/787.49b23ee4.chunk.js": "/spp-web/static/js/787.49b23ee4.chunk.js",
     "static/media/404.svg": "/spp-web/static/media/404.67bf2844dc96a568ff9bd533b869233c.svg",
+    "static/media/hero-img.png": "/spp-web/static/media/hero-img.14dc8f7a4d4b3edb0402.png",
     "static/media/astronaut.svg": "/spp-web/static/media/astronaut.f03a623b0a0785af68937ae4e87d2c12.svg",
     "index.html": "/spp-web/index.html",
     "main.e44810fc.css.map": "/spp-web/static/css/main.e44810fc.css.map",
-    "main.76230062.js.map": "/spp-web/static/js/main.76230062.js.map",
+    "main.033fbec8.js.map": "/spp-web/static/js/main.033fbec8.js.map",
+    "903.a063e20f.chunk.css.map": "/spp-web/static/css/903.a063e20f.chunk.css.map",
+    "903.b7e4316b.chunk.js.map": "/spp-web/static/js/903.b7e4316b.chunk.js.map",
     "752.ad7a7bcc.chunk.js.map": "/spp-web/static/js/752.ad7a7bcc.chunk.js.map",
     "787.49b23ee4.chunk.js.map": "/spp-web/static/js/787.49b23ee4.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.e44810fc.css",
-    "static/js/main.76230062.js"
+    "static/js/main.033fbec8.js"
   ]
 }
