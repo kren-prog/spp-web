@@ -8,6 +8,7 @@ import BasicPaginate from '../BasicPaginate';
 import ProcesosForm from './ProcesosForm';
 import SearchBar from '../SearchBar';
 import ItemsPerPage from '../ItemsPerPage';
+import axios from 'axios';
 
 function ProcesosTable() {
 

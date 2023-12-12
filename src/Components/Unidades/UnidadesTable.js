@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Table, Row } from 'react-bootstrap';
 import { Pencil } from 'react-bootstrap-icons';
 import UnidadesForm from './UnidadesForm';
@@ -8,15 +8,33 @@ import BasicModal from '../BasicModal';
 import BasicPaginate from '../BasicPaginate';
 import SearchBar from '../SearchBar';
 import ItemsPerPage from '../ItemsPerPage';
+import axios from 'axios';
 
 function UnidadesTable() {
-    
+
     const { show, handleClose, handleShow, searchTerm, handleSearch, numberOfRows, itemsPerPage, handleChangeItems, alertResponse, handleAlertResponse } = useForm();
-    
+
     const [currentPage, setCurrentPage] = React.useState(1);
 
     function handlePageClick({ selected: selectedPage }) {
         setCurrentPage(selectedPage);
+    }
+    // http://www.ingesoftware.net:8015/api/IsUnidades
+    const url = 'https://localhost:7197/api/IsUnidades';
+    const [unidades, setUnidades] = useState([]);
+    const [codUnidad, setCodUnidad] = useState('');
+    const [desUnidad, setDesUnidad] = useState('');
+    const [usaDecimal, setUsaDecimal] = useState(1);
+    const [magnitud, setMagnitud] = useState('');
+
+    useEffect(() => {
+        getUnidades();
+    }, []);
+
+    const getUnidades = async () => {
+        const respuesta = await axios.get(url);
+        console.log(respuesta.status);
+        setUnidades(respuesta.data.data);
     }
 
     const data = [
@@ -25,6 +43,7 @@ function UnidadesTable() {
         { code: 'MTS', description: 'Metros', decimal: 1, magnitud: 'Longitud' },
         { code: 'PRE', description: 'Prendas', decimal: 0, magnitud: 'Superficie' },
     ];
+
 
     const totalPages = Math.ceil(data.length / itemsPerPage); // data.length
     const startIndex = (currentPage - 1) * itemsPerPage;
@@ -40,7 +59,7 @@ function UnidadesTable() {
 
     return (
         <>
-          <Row>
+            <Row>
                 <SearchBar searchTerm={searchTerm} handleSearch={handleSearch} />
 
                 <ItemsPerPage handleChangeItems={handleChangeItems} numberOfRows={numberOfRows} />
@@ -57,12 +76,12 @@ function UnidadesTable() {
                 </thead>
                 <tbody>
 
-                    {currentData.map((item) => (
-                        <tr key={item.code}>
-                            <td>{item.code}</td>
-                            <td>{item.description}</td>
-                            <td>{item.decimal}</td>
-                            <td>{item.magnitud}</td>
+                    {unidades.map((unidad) => (
+                        <tr key={unidad.codUnidad}>
+                            <td>{unidad.codUnidad}</td>
+                            <td>{unidad.desUnidad}</td>
+                            <td>{unidad.usaDecimal}</td>
+                            <td>{unidad.magnitud}</td>
                             <td className="fixed-column">
                                 <div className="d-flex p-2">
                                     <span onClick={handleShow} style={{ cursor: 'pointer' }}>
@@ -82,7 +101,7 @@ function UnidadesTable() {
                                         icon="warning"
                                         typebtn="delete"
                                     />
-                                   
+
                                 </div>
                             </td>
                         </tr>
@@ -93,6 +112,9 @@ function UnidadesTable() {
             <div className='d-flex justify-content-center'>
                 <BasicPaginate totalPages={totalPages} handlePageClick={handlePageClick} />
             </div>
+
+
+           
         </>
     )
 }

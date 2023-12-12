@@ -39,6 +39,7 @@ import SuspenseDefault from 'Components/SuspenseDefault';
 
 import Login from '../Components/Login';
 import NotFound from '../Pages/notFound';
+import IsUnidades from 'Pages/Maestros/Basicos/IsUnidades';
 
 
 class AppRoutes extends Component {
@@ -49,7 +50,7 @@ class AppRoutes extends Component {
 
         <Route  index element={<Login />} />
 
-        <Route path="/spp-web" element={<h1>Bienvenido, por favor inicie sesion</h1>} />
+        <Route path="/spp-web" element={<SuspenseDefault path={import('Components/Landing')} />} />
 
         <Route path='/maestros-pages/configuracion-tipos'
           element={<SuspenseDefault path={import('Pages/Maestros/Configuracion/TiposYClasificacion')} />}>
@@ -61,7 +62,7 @@ class AppRoutes extends Component {
         <Route path="/maestros-pages/configuracion-spp" element={<ConfiguracionSPP />} />
 
         <Route path="/maestros-pages/basicos-departamentos" element={<DepartamentosMunicipios />} />
-        <Route path="/maestros-pages/basicos-unidades" element={<Unidades />} />
+        <Route path="/maestros-pages/basicos-unidades" element={<IsUnidades/>} />
         <Route path="/maestros-pages/basicos-conversion-unidades" element={<ConversionUnidades />} />
         <Route path="/maestros-pages/basicos-estructura-funcional" element={<EstructuraFuncional />} />
         <Route path="/maestros-pages/basicos-agrupacion-recurso" element={<AgrupacionRecurso />} />

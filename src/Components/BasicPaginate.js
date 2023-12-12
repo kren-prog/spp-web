@@ -5,8 +5,8 @@ import "../assets/styles/paginate.css";
 function BasicPaginate({totalPages, handlePageClick}) {
   return (
     <ReactPaginate
-                    previousLabel={"prev"}
-                    nextLabel={"next"}
+                    previousLabel={"Anterior"}
+                    nextLabel={"Siguiente"}
                     breakLabel={"..."}
                     pageCount={totalPages}
                     marginPagesDisplayed={2}
