@@ -6,6 +6,7 @@ import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 import BasicPaginate from 'Components/BasicPaginate';
 import ItemsPerPage from 'Components/ItemsPerPage';
+import SearchBar from 'Components/SearchBar';
 import axios from 'axios';
 
 function IsUnidades() {
@@ -21,11 +22,15 @@ function IsUnidades() {
 
     const [filteredData, setFilteredData] = useState([]);
     const [currentPage, setCurrentPage] = useState(0);
-    const itemsPerPage = 10; // Ajusta según tus necesidades
+
+    const [itemsPerPage, setItemsPerPage] = useState(10); // Valor predeterminado, ajusta según tus necesidades
+    const [totalPages, setTotalPages] = useState(0);
+
+    const [searchTerm, setSearchTerm] = useState('');
 
     useEffect(() => {
         getUnidades();
-    }, []);
+    }, [currentPage, itemsPerPage, searchTerm]);
 
     useEffect(() => {
         // Cuando cambia la página, actualiza los datos filtrados
@@ -33,16 +38,29 @@ function IsUnidades() {
         const endIndex = startIndex + itemsPerPage;
 
         if (unidades.length > 0) {
-            
-            setFilteredData(unidades.slice(startIndex, endIndex));
-            console.log(filteredData);
+
+            const filteredResults = unidades.filter(item =>
+                Object.values(item).some(value =>
+                  value && value.toString().toLowerCase().includes(searchTerm.toLowerCase())
+                )
+              );
+
+            setFilteredData(filteredResults.slice(startIndex, endIndex));
+            setTotalPages(Math.ceil(filteredResults.length / itemsPerPage));
         }
 
-    }, [unidades, currentPage]); // Actualiza los datos filtrados al cambiar la página o recibir nuevos datos
+    }, [unidades, currentPage, itemsPerPage, searchTerm]); // Actualiza los datos filtrados al cambiar la página o recibir nuevos datos
 
     const getUnidades = async () => {
         const respuesta = await axios.get(url);
         setUnidades(respuesta.data.data);
+        // Calcula la cantidad total de páginas en función de los datos y la cantidad de elementos por página
+        setTotalPages(Math.ceil(respuesta.data.data.length / itemsPerPage));
+
+        // Asegúrate de que la página actual no sea mayor que la última página
+        const lastPage = Math.max(0, totalPages - 1);
+        const actualPage = Math.min(currentPage, lastPage);
+        setCurrentPage(actualPage);
     }
     const handleChangeUsaDecimal = () => {
         setUsaDecimal(!usaDecimal); // Invierte el valor actual al hacer clic en el checkbox
@@ -74,6 +92,15 @@ function IsUnidades() {
     function handlePageClick({ selected: selectedPage }) {
         setCurrentPage(selectedPage);
     }
+
+    const handleItemsPerPageChange = (e) => {
+        const newItemsPerPage = parseInt(e.target.value, 10);
+        setItemsPerPage(newItemsPerPage);
+    };
+
+    const handleSearchTermChange = (e) => {
+        setSearchTerm(e.target.value);
+      };
 
     const validar = () => {
         var newUrl = "";
@@ -133,7 +160,9 @@ function IsUnidades() {
                 Añadir  <PlusCircle color="white" size={18} title="Add" />
             </Button>
 
-            
+            <ItemsPerPage handleChangeItems={handleItemsPerPageChange} numberOfRows={itemsPerPage} />
+
+            <SearchBar searchTerm={searchTerm} handleSearch={handleSearchTermChange} />
 
             <Table striped bordered hover responsive size="sm">
                 <thead>
@@ -173,7 +202,7 @@ function IsUnidades() {
             </Table>
 
             <div className='d-flex justify-content-center'>
-                <BasicPaginate totalPages={Math.ceil(unidades.length / itemsPerPage)} handlePageClick={handlePageClick} />
+                <BasicPaginate totalPages={totalPages} handlePageClick={handlePageClick} />
             </div>
 
             <Modal

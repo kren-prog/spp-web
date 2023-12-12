@@ -7,8 +7,7 @@ function ItemsPerPage({handleChangeItems, numberOfRows}) {
             <InputGroup size="sm" className="mb-2">
 
                 <InputGroup.Text className='fw-bold'>Cant. mostrar</InputGroup.Text>
-                <Form.Select aria-label="Default select example" onChange={handleChangeItems}>
-                    <option defaultValue={numberOfRows}>{numberOfRows}</option>
+                <Form.Select aria-label="Default select example" value={numberOfRows} onChange={handleChangeItems}>
                     <option value="5">5</option>
                     <option value="10">10</option>
                     <option value="50">50</option>
