@@ -11,7 +11,7 @@ import axios from 'axios';
 
 function IsUnidades() {
 
-    const url = 'https://localhost:7197/api/IsUnidades';
+    const url = 'http://www.ingesoftware.net:8015/api/IsUnidades';
     const [unidades, setUnidades] = useState([]);
     const [codUnidad, setCodUnidad] = useState('');
     const [desUnidad, setDesUnidad] = useState('');
@@ -175,7 +175,7 @@ function IsUnidades() {
 
             <Table striped bordered hover responsive size="sm">
                 <thead>
-                    <tr>
+                    <tr className='table-info'>
                         <th>Cod Unidad</th>
                         <th>Descripcion</th>
                         <th>Usa decimal</th>

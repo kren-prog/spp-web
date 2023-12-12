@@ -40,7 +40,7 @@ function Login() {
 
     const handleLogin = async () => {
         try {
-            const response = await axios.post('https://localhost:7197/api/IsUsuarios/login', {
+            const response = await axios.post('http://www.ingesoftware.net:8015/api/IsUsuarios/login', {
                 username: username,
                 password: password,
             });
@@ -49,9 +49,8 @@ function Login() {
                 const token = response.data.data; // aca viene el token -_-
                 // Guarda el token en el almacenamiento local (localStorage)
                 localStorage.setItem('token', token);
-                console.log(response.data);
                 // Redirecciona o realiza otras acciones después del inicio de sesión
-                navigate('/maestros-pages/configuracion-tipos');
+                navigate('/maestros-pages/basicos-unidades');
                 authContext.updateUser(username);
             } else {
                 // Maneja errores de autenticación
