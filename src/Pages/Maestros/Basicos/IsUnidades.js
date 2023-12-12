@@ -123,7 +123,14 @@ function IsUnidades() {
     };
 
     const enviarSolicitud = async (metodo, parametros, url) => {
-        await axios({ method: metodo, url: url, data: parametros }).then(function (respuesta) {
+        const token = localStorage.getItem('token');
+        // Configurar el encabezado de autorización con el token
+        const headers = {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json', // Ajusta el tipo de contenido según tus necesidades
+        };
+        
+        await axios({ method: metodo, url: url, data: parametros, headers: headers }).then(function (respuesta) {
             var tipo = respuesta.data.status;
             var msj = respuesta.data[1];
             console.log(respuesta.data);
