@@ -41,9 +41,9 @@ function IsUnidades() {
 
             const filteredResults = unidades.filter(item =>
                 Object.values(item).some(value =>
-                  value && value.toString().toLowerCase().includes(searchTerm.toLowerCase())
+                    value && value.toString().toLowerCase().includes(searchTerm.toLowerCase())
                 )
-              );
+            );
 
             setFilteredData(filteredResults.slice(startIndex, endIndex));
             setTotalPages(Math.ceil(filteredResults.length / itemsPerPage));
@@ -100,7 +100,7 @@ function IsUnidades() {
 
     const handleSearchTermChange = (e) => {
         setSearchTerm(e.target.value);
-      };
+    };
 
     const validar = () => {
         var newUrl = "";
@@ -156,13 +156,15 @@ function IsUnidades() {
 
     return (
         <>
-            <Button variant="warning" className='btn btn-sm m-2 fw-bold text-white' onClick={() => handleShow(1)}>
-                Añadir  <PlusCircle color="white" size={18} title="Add" />
-            </Button>
+            <Row>
+                <Button as={Col} md={2} lg={2} xl={2} variant="warning" className='btn btn-sm mb-2 ms-2 fw-bold text-white' onClick={() => handleShow(1)}>
+                    Añadir  <PlusCircle color="white" size={18} title="Add" />
+                </Button>
 
-            <ItemsPerPage handleChangeItems={handleItemsPerPageChange} numberOfRows={itemsPerPage} />
+                <ItemsPerPage handleChangeItems={handleItemsPerPageChange} numberOfRows={itemsPerPage} />
 
-            <SearchBar searchTerm={searchTerm} handleSearch={handleSearchTermChange} />
+                <SearchBar searchTerm={searchTerm} handleSearch={handleSearchTermChange} />
+            </Row>
 
             <Table striped bordered hover responsive size="sm">
                 <thead>
