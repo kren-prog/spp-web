@@ -4,7 +4,7 @@ import { KeyFill, PersonFill, Eye, EyeSlash } from "react-bootstrap-icons";
 import svgI from "../assets/images/astronaut.svg";
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from './AuthContext';
-import axios from 'axios';
+import { loginApi } from 'App/api';
 
 function Login() {
     const navigate = useNavigate();
@@ -39,14 +39,13 @@ function Login() {
     }
 
     const handleLogin = async () => {
+        const url = 'IsUsuarios/login';
+
         try {
-            const response = await axios.post('http://www.ingesoftware.net:8015/api/IsUsuarios/login', {
-                username: username,
-                password: password,
-            });
+            const response = await loginApi(url, username, password);
 
             if (response.status === 200) {
-                const token = response.data.data; // aca viene el token -_-
+                const token = response.data; // aca viene el token -_-
                 // Guarda el token en el almacenamiento local (localStorage)
                 localStorage.setItem('token', token);
                 // Redirecciona o realiza otras acciones después del inicio de sesión
@@ -54,7 +53,7 @@ function Login() {
                 authContext.updateUser(username);
             } else {
                 // Maneja errores de autenticación
-                console.error('Error de autenticación');
+                console.error('Error de autenticación ' + response.message);
             }
         } catch (error) {
             console.error('Error de red:', error);

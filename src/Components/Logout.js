@@ -18,6 +18,7 @@ function Logout() {
     const onLogout = () => {
         setShow(false);
         authContext.updateUser(null);
+        localStorage.removeItem('token');
         navigate('/');
     };
 

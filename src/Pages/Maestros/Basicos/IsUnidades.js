@@ -7,23 +7,23 @@ import withReactContent from 'sweetalert2-react-content';
 import BasicPaginate from 'Components/BasicPaginate';
 import ItemsPerPage from 'Components/ItemsPerPage';
 import SearchBar from 'Components/SearchBar';
-import axios from 'axios';
+import { fetchData, createData, updateData, deleteData } from 'App/api';
 
 function IsUnidades() {
 
-    const url = 'http://www.ingesoftware.net:8015/api/IsUnidades';
+    const url = 'IsUnidades';
     const [unidades, setUnidades] = useState([]);
     const [codUnidad, setCodUnidad] = useState('');
     const [desUnidad, setDesUnidad] = useState('');
     const [usaDecimal, setUsaDecimal] = useState(true);
     const [magnitud, setMagnitud] = useState('');
 
-    const [operacion, setOperacion] = useState(1);
+    const [operacion, setOperacion] = useState(1); // Para diferenciar si se hace update o post
 
     const [filteredData, setFilteredData] = useState([]);
     const [currentPage, setCurrentPage] = useState(0);
 
-    const [itemsPerPage, setItemsPerPage] = useState(10); // Valor predeterminado, ajusta según tus necesidades
+    const [itemsPerPage, setItemsPerPage] = useState(10); // Valor predeterminado, ajusta según necesidades
     const [totalPages, setTotalPages] = useState(0);
 
     const [searchTerm, setSearchTerm] = useState('');
@@ -52,15 +52,18 @@ function IsUnidades() {
     }, [unidades, currentPage, itemsPerPage, searchTerm]); // Actualiza los datos filtrados al cambiar la página o recibir nuevos datos
 
     const getUnidades = async () => {
-        const respuesta = await axios.get(url);
-        setUnidades(respuesta.data.data);
-        // Calcula la cantidad total de páginas en función de los datos y la cantidad de elementos por página
-        setTotalPages(Math.ceil(respuesta.data.data.length / itemsPerPage));
+        const result = await fetchData(url);
+        // result es undefined cuando el status fue algo diferente de 200
+        if (result !== undefined) {
+            setUnidades(result);
+            // Calcula la cantidad total de páginas en función de los datos y la cantidad de elementos por página
+            setTotalPages(Math.ceil(result.length / itemsPerPage));
 
-        // Asegúrate de que la página actual no sea mayor que la última página
-        const lastPage = Math.max(0, totalPages - 1);
-        const actualPage = Math.min(currentPage, lastPage);
-        setCurrentPage(actualPage);
+            // Asegura que la página actual no sea mayor que la última página
+            const lastPage = Math.max(0, totalPages - 1);
+            const actualPage = Math.min(currentPage, lastPage);
+            setCurrentPage(actualPage);
+        }
     }
     const handleChangeUsaDecimal = () => {
         setUsaDecimal(!usaDecimal); // Invierte el valor actual al hacer clic en el checkbox
@@ -103,60 +106,51 @@ function IsUnidades() {
     };
 
     const validar = () => {
-        var newUrl = "";
+        let newUrl = url;
         var parametros = {
             codUnidad: codUnidad.trim(),
             desUnidad: desUnidad.trim(),
-            usaDecimal: true,
+            usaDecimal: usaDecimal,
             magnitud: magnitud.trim()
         };
-        var metodo;
 
         if (operacion === 1) {
-            metodo = 'POST';
-            newUrl = url;
+            enviarSolicitud(1, url, parametros);
         } else {
-            metodo = 'PUT';
             newUrl = url + "/" + codUnidad.trim();
+            enviarSolicitud(2, newUrl, parametros);
         }
-        enviarSolicitud(metodo, parametros, newUrl);
+
     };
 
-    const enviarSolicitud = async (metodo, parametros, url) => {
-        const token = localStorage.getItem('token');
-        // Configurar el encabezado de autorización con el token
-        const headers = {
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json', // Ajusta el tipo de contenido según tus necesidades
-        };
-        
-        await axios({ method: metodo, url: url, data: parametros, headers: headers }).then(function (respuesta) {
-            var tipo = respuesta.data.status;
-            var msj = respuesta.data[1];
-            console.log(respuesta.data);
-            if (tipo === 200) {
-                getUnidades();
-                handleClose();
-            }
-        })
-            .catch(function (error) {
-                console.log(error);
-            });
+    const enviarSolicitud = async (op, url, parametros) => {
+        let result;
+        if (op == 1) {
+            result = await createData(url, parametros);
+        } if (op == 2) {
+            result = await updateData(url, parametros);
+        } if(op == 3) {
+            result = await deleteData(url);
+        }
+        if (result !== undefined) {
+            getUnidades();
+            handleClose();
+        }
     }
 
-    const deleteUnidad = (codUnidad, name) => {
-        var newUrl = "";
+    const confirmDeleteUnidad = (codUnidad, name) => {
+
         const MySwal = withReactContent(Swal);
         MySwal.fire({
-            title: 'Seguro?',
+            title: '¿Esta seguro?',
             icon: 'question',
-            text: 'ah',
+            text: 'Se va a eliminar la unidad ' + name,
             showCancelButton: true, confirmButtonText: 'Si, eliminar', cancelButtonText: 'Cancelar'
         }).then((result) => {
             if (result.isConfirmed) {
                 setCodUnidad(codUnidad);
-                newUrl = url + "/" + codUnidad.trim();
-                enviarSolicitud('DELETE', { id: codUnidad }, newUrl)
+                const newUrl = url + "/" + codUnidad.trim();
+                enviarSolicitud(3, newUrl);
             }
         });
     }
@@ -197,7 +191,7 @@ function IsUnidades() {
                                         <Pencil color="royalblue" size={24} title="Editar" />
                                     </span>
 
-                                    <span onClick={() => deleteUnidad(unidad.codUnidad, unidad.desUnidad)} style={{ cursor: 'pointer' }}>
+                                    <span onClick={() => confirmDeleteUnidad(unidad.codUnidad, unidad.desUnidad)} style={{ cursor: 'pointer' }}>
                                         <Trash color="DarkRed" size={24} title="Eliminar" />
                                     </span>
 
