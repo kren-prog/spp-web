@@ -41,6 +41,7 @@ import Login from '../Components/Login';
 import NotFound from '../Pages/notFound';
 import IsUnidades from 'Pages/Maestros/Basicos/IsUnidades';
 import RedirectOnTokenExpiration from 'App/tokenExpiration';
+import ProtectedRoute from './ProtectedRoute';
 
 class AppRoutes extends Component {
   render() {
@@ -53,24 +54,28 @@ class AppRoutes extends Component {
 
         <Route path="/spp-web" element={<SuspenseDefault path={import('Components/Landing')} />} />
 
-        <Route path="/" element={<RedirectOnTokenExpiration />} >
+        <Route path='/maestros-pages/configuracion-tipos'
+          element={<SuspenseDefault path={import('Pages/Maestros/Configuracion/TiposYClasificacion')} />}>
+        </Route>
+
+        <Route element={<ProtectedRoute />} >
 
           <Route path='/maestros-pages/basicos-unidades'
             element={<SuspenseDefault path={import('Pages/Maestros/Basicos/IsUnidades')} />}>
           </Route>
 
+          <Route path="/maestros-pages/basicos-departamentos" element={<DepartamentosMunicipios />} />
+
         </Route>
 
-        <Route path='/maestros-pages/configuracion-tipos'
-          element={<SuspenseDefault path={import('Pages/Maestros/Configuracion/TiposYClasificacion')} />}>
-        </Route>
+
 
         <Route path="/maestros-pages/configuracion-opcional" element={<ConfiguracionOpcional />} />
         <Route path="/maestros-pages/configuracion-color" element={<ConfiguracionColor />} />
         <Route path="/maestros-pages/configuracion-consecutivo" element={<ConfiguracionConsecutivo />} />
         <Route path="/maestros-pages/configuracion-spp" element={<ConfiguracionSPP />} />
 
-        <Route path="/maestros-pages/basicos-departamentos" element={<DepartamentosMunicipios />} />
+
 
 
 

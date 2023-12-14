@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom'; // Asume que estás utilizando react-router-dom
+import { useNavigate, Outlet } from 'react-router-dom'; // Asume que estás utilizando react-router-dom
 import { jwtDecode } from 'jwt-decode';
 import { AuthContext } from 'Components/AuthContext';
 
@@ -27,6 +27,8 @@ const RedirectOnTokenExpiration = () => {
             localStorage.removeItem('token');
             // El token ha expirado, redirigir al usuario al login
             navigate('/login');
+        } else {
+            return <Outlet/>
         }
     }, [token, navigate]);
 
@@ -34,6 +36,7 @@ const RedirectOnTokenExpiration = () => {
     return (
         <div>
             {/* Contenido del componente */}
+            <h1>Token expiration</h1>
         </div>
     );
 };

@@ -13,7 +13,6 @@ import Logout from './Logout';
 function HeaderNavbar() {
   const authContext = React.useContext(AuthContext);
   const { state } = useLocation();
-  console.log(authContext.user);
 
   const routesConfig = [{
     to: '/maestros-pages/configuracion-tipos',
@@ -48,7 +47,7 @@ function HeaderNavbar() {
     to: '/maestros-pages/basicos-estructura-funcional',
     text: 'Esctructura Funcional'
   }, {
-    to: '',
+    to: '1b',
     text: 'DIVIDER'
   }, {
     to: '/maestros-pages/basicos-agrupacion-recurso',
@@ -60,7 +59,7 @@ function HeaderNavbar() {
     to: '/maestros-pages/basicos-recurso-proceso',
     text: 'Tipo de recurso por proceso'
   }, {
-    to: '',
+    to: '2b',
     text: 'DIVIDER'
   }, {
     to: '/maestros-pages/basicos-procesos',
@@ -75,7 +74,7 @@ function HeaderNavbar() {
     to: '/maestros-pages/basicos-operacion-proceso',
     text: 'Operacion proceso por material'
   }, {
-    to: '',
+    to: '3b',
     text: 'DIVIDER'
   }, {
     to: '/maestros-pages/basicos-clientes',
@@ -118,7 +117,7 @@ function HeaderNavbar() {
               <DropdownSubmenu href="#action/3.7" title="Basicos">
 
                 {routesBasic.map((item) => (
-                  <div key={item.text}>
+                  <div key={item.to}>
                     {item.text === 'DIVIDER' ? <NavDropdown.Divider /> : <NavDropdown.Item className='' as={Link} to={item.to}>
                       {item.text}
                     </NavDropdown.Item>}
