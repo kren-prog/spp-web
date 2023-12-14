@@ -1,10 +1,15 @@
 import axios from 'axios';
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
+
 // http://www.ingesoftware.net:8015  https://localhost:7197
 const API_BASE_URL = 'http://www.ingesoftware.net:8015/api';
 
 const callApi = async (url, method, data = null) => {
-
+   
     const token = localStorage.getItem('token');
+
+
     const headers = {
         'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/json',
@@ -17,15 +22,20 @@ const callApi = async (url, method, data = null) => {
             data: data,
             headers: headers,
         });
-        console.log('METODO '+ method);
-        console.log('DATA '+ data);
+       
         var status = response.data.status; //status enviado manualmente desde API, es un error conocido
-        var msj = response.data.message;
+        var msg = response.data.message;
 
-        if (status == 200) {
+        if (status === 200) {
             return response.data.data;
         }
-        console.log(msj);
+        const MySwal = withReactContent(Swal);
+        MySwal.fire({
+            title: "Oops!",
+            text: msg,
+            icon: "error"
+          });
+        console.log(response.message);
     } catch (error) {
         // Manejar errores de manera centralizada si es necesario
         console.error('Error en la solicitud:', error);
@@ -62,8 +72,19 @@ export const loginApi = async (url, username, password) => {
             username: username,
             password: password,
         });
+        if(response.data.status !== 200){
+            const MySwal = withReactContent(Swal);
+            MySwal.fire({
+                title: "Oops!",
+                text: response.data.message,
+                icon: "error"
+              });
+        }
         return response.data;
     } catch (error) {
         console.error('Error en el login:', error);
     }
 }
+
+
+

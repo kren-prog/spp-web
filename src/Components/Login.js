@@ -15,6 +15,8 @@ function Login() {
     const [showEye, setShowEye] = React.useState(false);
     const authContext = React.useContext(AuthContext);
 
+    const [loading, setLoading] = useState(false);
+
     const login = (e) => {
         e.preventDefault();
         navigate('/maestros-pages/basicos-unidades');
@@ -40,7 +42,7 @@ function Login() {
 
     const handleLogin = async () => {
         const url = 'IsUsuarios/login';
-
+        setLoading(true);
         try {
             const response = await loginApi(url, username, password);
 
@@ -57,6 +59,8 @@ function Login() {
             }
         } catch (error) {
             console.error('Error de red:', error);
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -64,10 +68,10 @@ function Login() {
         <Container className="">
 
             <div className='row' style={{
-               display: "flex",
-               alignItems: "center",
-               justifyContent: "center",
-               minHeight: "75vh"
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                minHeight: "75vh"
             }}>
                 <div className="col-12 col-sm-10 col-lg-6 col-xl-4">
 
@@ -123,7 +127,9 @@ function Login() {
                                 </InputGroup>
 
 
-                                <Button onClick={handleLogin} variant="primary" className='w-75 mt-2'>Iniciar sesion</Button>
+                                <Button onClick={handleLogin} variant="primary" disabled={loading} className='w-75 mt-2'>
+                                    {loading ? 'Iniciando sesión...' : 'Iniciar Sesión'}
+                                </Button>
                             </Form>
                         </Card.Body>
                     </Card>

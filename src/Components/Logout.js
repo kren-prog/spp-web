@@ -19,7 +19,7 @@ function Logout() {
         setShow(false);
         authContext.updateUser(null);
         localStorage.removeItem('token');
-        navigate('/');
+        navigate('/login');
     };
 
     return (
