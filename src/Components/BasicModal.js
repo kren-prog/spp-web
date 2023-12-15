@@ -8,7 +8,6 @@ function BasicModal({ children, handleClose, title }) {
 
     // const handleClose = () => setShow(false);
     // const handleShow = () => setShow(true);
-
     return (
         <>
             {/* <Button variant="warning" className='btn btn-sm m-2 fw-bold text-white' onClick={handleShow}>

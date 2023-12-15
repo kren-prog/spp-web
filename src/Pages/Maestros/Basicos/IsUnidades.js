@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Table, Row, Form, Col, Button } from 'react-bootstrap';
-import Modal from 'react-bootstrap/Modal';
+import { Table, Row, Col, Button } from 'react-bootstrap';
 import { Pencil, BookmarkStarFill, PlusCircle, Trash } from 'react-bootstrap-icons';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
@@ -8,15 +7,12 @@ import BasicPaginate from 'Components/BasicPaginate';
 import ItemsPerPage from 'Components/ItemsPerPage';
 import SearchBar from 'Components/SearchBar';
 import { fetchData, createData, updateData, deleteData } from 'App/api';
+import ModalUnidades from './ModalUnidades';
 
 function IsUnidades() {
 
     const url = 'IsUnidades';
     const [unidades, setUnidades] = useState([]);
-    const [codUnidad, setCodUnidad] = useState('');
-    const [desUnidad, setDesUnidad] = useState('');
-    const [usaDecimal, setUsaDecimal] = useState(true);
-    const [magnitud, setMagnitud] = useState('');
 
     const [operacion, setOperacion] = useState(1); // Para diferenciar si se hace update o post
 
@@ -27,6 +23,10 @@ function IsUnidades() {
     const [totalPages, setTotalPages] = useState(0);
 
     const [searchTerm, setSearchTerm] = useState('');
+
+    const [loading, setLoading] = useState(true);
+
+    const [selectedItem, setSelectedItem] = useState(null);
 
     useEffect(() => {
         getUnidades();
@@ -64,30 +64,23 @@ function IsUnidades() {
             const actualPage = Math.min(currentPage, lastPage);
             setCurrentPage(actualPage);
         }
+        setLoading(false);
     }
-    const handleChangeUsaDecimal = () => {
-        setUsaDecimal(!usaDecimal); // Invierte el valor actual al hacer clic en el checkbox
-    };
 
+    const defaultValues = {  codUnidad: "", desUnidad: "", usaDecimal: false, magnitud: "" };
     // MODAL
     const [show, setShow] = useState(false);
     const [title, setTitle] = useState('');
     const handleClose = () => setShow(false);
-    const handleShow = (op, codUnidad, desUnidad, usaDecimal, magnitud) => {
-        setCodUnidad('');
-        setDesUnidad('');
-        setUsaDecimal('');
-        setMagnitud('');
+    const handleShow = (op, unidad) => {
         setOperacion(op);
         setShow(true);
+        setSelectedItem(defaultValues);
         if (op === 1) {
             setTitle("Registrar unidad");
         } else if (op === 2) {
             setTitle("Editar Unidad");
-            setCodUnidad(codUnidad);
-            setDesUnidad(desUnidad);
-            setUsaDecimal(usaDecimal);
-            setMagnitud(magnitud);
+            setSelectedItem(unidad);
         }
     };
 
@@ -105,31 +98,13 @@ function IsUnidades() {
         setSearchTerm(e.target.value);
     };
 
-    const validar = () => {
-        let newUrl = url;
-        var parametros = {
-            codUnidad: codUnidad.trim(),
-            desUnidad: desUnidad.trim(),
-            usaDecimal: usaDecimal,
-            magnitud: magnitud.trim()
-        };
-
-        if (operacion === 1) {
-            enviarSolicitud(1, url, parametros);
-        } else {
-            newUrl = url + "/" + codUnidad.trim();
-            enviarSolicitud(2, newUrl, parametros);
-        }
-
-    };
-
     const enviarSolicitud = async (op, url, parametros) => {
         let result;
-        if (op == 1) {
+        if (op === 1) {
             result = await createData(url, parametros);
-        } if (op == 2) {
+        } if (op === 2) {
             result = await updateData(url, parametros);
-        } if(op == 3) {
+        } if (op === 3) {
             result = await deleteData(url);
         }
         if (result !== undefined) {
@@ -148,12 +123,21 @@ function IsUnidades() {
             showCancelButton: true, confirmButtonText: 'Si, eliminar', cancelButtonText: 'Cancelar'
         }).then((result) => {
             if (result.isConfirmed) {
-                setCodUnidad(codUnidad);
                 const newUrl = url + "/" + codUnidad.trim();
                 enviarSolicitud(3, newUrl);
             }
         });
     }
+
+    const onSubmit = (data) => {
+
+        if (operacion === 1) {
+            enviarSolicitud(1, url, data);
+        } else {
+            const newUrl = url + "/" + data.codUnidad.trim();
+            enviarSolicitud(2, newUrl, data);
+        }
+    };
 
     return (
         <>
@@ -179,27 +163,28 @@ function IsUnidades() {
                 </thead>
                 <tbody>
 
-                    {filteredData.map((unidad) => (
-                        <tr key={unidad.codUnidad}>
-                            <td>{unidad.codUnidad}</td>
-                            <td>{unidad.desUnidad}</td>
-                            <td>{unidad.usaDecimal ? "SI" : "NO"}</td>
-                            <td>{unidad.magnitud}</td>
-                            <td className="fixed-column">
-                                <div className="d-flex p-2">
-                                    <span onClick={() => handleShow(2, unidad.codUnidad, unidad.desUnidad, unidad.usaDecimal, unidad.magnitud)} style={{ cursor: 'pointer' }}>
-                                        <Pencil color="royalblue" size={24} title="Editar" />
-                                    </span>
+                    {loading ? <tr><td colSpan="5"><h2>Cargando...</h2></td></tr>
+                        : filteredData.map((unidad) => (
+                            <tr key={unidad.codUnidad}>
+                                <td>{unidad.codUnidad}</td>
+                                <td>{unidad.desUnidad}</td>
+                                <td>{unidad.usaDecimal ? "SI" : "NO"}</td>
+                                <td>{unidad.magnitud}</td>
+                                <td className="fixed-column">
+                                    <div className="d-flex p-2">
+                                        <span onClick={() => handleShow(2, unidad)} style={{ cursor: 'pointer' }}>
+                                            <Pencil color="royalblue" size={24} title="Editar" />
+                                        </span>
 
-                                    <span onClick={() => confirmDeleteUnidad(unidad.codUnidad, unidad.desUnidad)} style={{ cursor: 'pointer' }}>
-                                        <Trash color="DarkRed" size={24} title="Eliminar" />
-                                    </span>
+                                        <span onClick={() => confirmDeleteUnidad(unidad.codUnidad, unidad.desUnidad)} style={{ cursor: 'pointer' }}>
+                                            <Trash color="DarkRed" size={24} title="Eliminar" />
+                                        </span>
 
 
-                                </div>
-                            </td>
-                        </tr>
-                    ))}
+                                    </div>
+                                </td>
+                            </tr>
+                        ))}
 
                 </tbody>
             </Table>
@@ -208,67 +193,8 @@ function IsUnidades() {
                 <BasicPaginate totalPages={totalPages} handlePageClick={handlePageClick} />
             </div>
 
-            <Modal
-                id="modalUnidades"
-                size="lg"
-                show={show}
-                onHide={handleClose}
-                backdrop="static"
-                keyboard={false}
-            >
-                <Modal.Header closeButton>
-                    <Modal.Title>{title}</Modal.Title>
-                </Modal.Header>
-                <Modal.Body className='bg-primary bg-opacity-10'>
+            <ModalUnidades show={show} handleClose={handleClose} title={title} initialValues={selectedItem} onSubmit={onSubmit} />
 
-                    <Form>
-                        <Row>
-                            <Form.Group as={Col} controlId="codUnidad">
-                                <Form.Label>Codigo</Form.Label>
-                                <Form.Control type="text" className='w-25' id='codUnidad' value={codUnidad} onChange={(e) => setCodUnidad(e.target.value)} />
-                            </Form.Group>
-                        </Row>
-                        <Row>
-                            <Form.Group as={Col} controlId="desUnidad">
-                                <Form.Label>Descripcion</Form.Label>
-                                <Form.Control type="text" id='desUnidad' value={desUnidad} onChange={(e) => setDesUnidad(e.target.value)} />
-                            </Form.Group>
-                        </Row>
-                        <Row>
-                            <Form.Group as={Col} controlId="usaDecimal">
-                                <Form.Label>Usa decimal</Form.Label>
-
-                                <Form.Check // prettier-ignore
-                                    type="checkbox"
-                                    id="usaDecimal"
-                                    label="Usa decimal"
-                                    checked={usaDecimal}
-                                    onChange={handleChangeUsaDecimal}
-                                />
-                            </Form.Group>
-                            <Form.Group as={Col} controlId="magnitud">
-                                <Form.Label>Magnitud</Form.Label>
-                                <Form.Control type="text" id='magnitud' value={magnitud} onChange={(e) => setMagnitud(e.target.value)} />
-                            </Form.Group>
-                        </Row>
-
-
-                        <div className='text-center'>
-                            <Button onClick={() => validar()} variant="success" className='btn btn-sm m-2 fw-bold'>
-                                Guardar <BookmarkStarFill color="white" size={18} title="Save" />
-                            </Button>
-                        </div>
-
-                    </Form>
-
-                </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={handleClose}>
-                        Cerrar
-                    </Button>
-
-                </Modal.Footer>
-            </Modal>
 
         </>
     )

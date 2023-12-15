@@ -25,6 +25,8 @@ const ProtectedRoute = ({
         authContext.updateUser(null);
         localStorage.removeItem('token');
         return <Navigate to = {redirectPath} replace />
+    } else if(!token){
+        return <Navigate to = {redirectPath} replace />
     }
     return <Outlet/>
 }
