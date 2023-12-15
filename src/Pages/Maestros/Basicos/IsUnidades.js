@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { Table, Row, Col, Button } from 'react-bootstrap';
-import { Pencil, BookmarkStarFill, PlusCircle, Trash } from 'react-bootstrap-icons';
+import {  Row, Col, Button } from 'react-bootstrap';
+import {  PlusCircle } from 'react-bootstrap-icons';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 import BasicPaginate from 'Components/BasicPaginate';
@@ -8,6 +8,7 @@ import ItemsPerPage from 'Components/ItemsPerPage';
 import SearchBar from 'Components/SearchBar';
 import { fetchData, createData, updateData, deleteData } from 'App/api';
 import ModalUnidades from './ModalUnidades';
+import TableUnidades from './TableUnidades';
 
 function IsUnidades() {
 
@@ -67,7 +68,7 @@ function IsUnidades() {
         setLoading(false);
     }
 
-    const defaultValues = {  codUnidad: "", desUnidad: "", usaDecimal: false, magnitud: "" };
+    const defaultValues = { codUnidad: "", desUnidad: "", usaDecimal: false, magnitud: "" };
     // MODAL
     const [show, setShow] = useState(false);
     const [title, setTitle] = useState('');
@@ -151,50 +152,13 @@ function IsUnidades() {
                 <SearchBar searchTerm={searchTerm} handleSearch={handleSearchTermChange} />
             </Row>
 
-            <Table striped bordered hover responsive size="sm">
-                <thead>
-                    <tr className='table-info'>
-                        <th>Cod Unidad</th>
-                        <th>Descripcion</th>
-                        <th>Usa decimal</th>
-                        <th>Magnitud</th>
-                        <th className="fixed-column">Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-
-                    {loading ? <tr><td colSpan="5"><h2>Cargando...</h2></td></tr>
-                        : filteredData.map((unidad) => (
-                            <tr key={unidad.codUnidad}>
-                                <td>{unidad.codUnidad}</td>
-                                <td>{unidad.desUnidad}</td>
-                                <td>{unidad.usaDecimal ? "SI" : "NO"}</td>
-                                <td>{unidad.magnitud}</td>
-                                <td className="fixed-column">
-                                    <div className="d-flex p-2">
-                                        <span onClick={() => handleShow(2, unidad)} style={{ cursor: 'pointer' }}>
-                                            <Pencil color="royalblue" size={24} title="Editar" />
-                                        </span>
-
-                                        <span onClick={() => confirmDeleteUnidad(unidad.codUnidad, unidad.desUnidad)} style={{ cursor: 'pointer' }}>
-                                            <Trash color="DarkRed" size={24} title="Eliminar" />
-                                        </span>
-
-
-                                    </div>
-                                </td>
-                            </tr>
-                        ))}
-
-                </tbody>
-            </Table>
+            <TableUnidades loading={loading} filteredData={filteredData} handleShow={handleShow} confirmDeleteUnidad={confirmDeleteUnidad} />
 
             <div className='d-flex justify-content-center'>
                 <BasicPaginate totalPages={totalPages} handlePageClick={handlePageClick} />
             </div>
 
             <ModalUnidades show={show} handleClose={handleClose} title={title} initialValues={selectedItem} onSubmit={onSubmit} />
-
 
         </>
     )
