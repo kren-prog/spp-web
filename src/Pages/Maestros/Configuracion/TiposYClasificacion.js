@@ -30,6 +30,8 @@ function TiposYClasificacion() {
 
     const [selectedItem, setSelectedItem] = useState(null);
 
+    const [isEdit, setIsEdit] = useState(false);
+
     useEffect(() => {
         getTiposGenericos();
     }, [currentPage, itemsPerPage, searchTerm]);
@@ -99,6 +101,7 @@ function TiposYClasificacion() {
         } else if (op === 2) {
             setTitle("Editar");
             setSelectedItem(tipoGenerico);
+            setIsEdit(true);
         }
     };
 
@@ -177,7 +180,7 @@ function TiposYClasificacion() {
             </div>
 
             <BasicModal show={show} handleClose={handleClose} title={title}>
-                <TiposForm initialValues={selectedItem} onSubmit={onSubmit} />
+                <TiposForm initialValues={selectedItem} onSubmit={onSubmit} isEdit={isEdit}/>
             </BasicModal>
 
         </>

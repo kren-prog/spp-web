@@ -30,7 +30,7 @@ function TableTipos({ loading, filteredData, handleShow, confirmDeleteUnidad }) 
                 </thead>
                 <tbody>
 
-                    {loading ? <tr><td colSpan="14"><h2>Cargando...</h2></td></tr>
+                    {loading ? <tr><td className='text-center' colSpan="14"><h2>Cargando...</h2></td></tr>
                         :filteredData.map((item) => (
                         <tr key={item.codTipoCadena}>
                             <td>{item.codTipoGenerico}</td>
@@ -52,7 +52,7 @@ function TableTipos({ loading, filteredData, handleShow, confirmDeleteUnidad }) 
                                         <Pencil color="royalblue" size={24} title="Editar" />
                                     </span>
 
-                                    <span onClick={() => confirmDeleteUnidad(item.codTipoGenerico, item.codTipoCadena, item.codTipoEntero, item.description)} style={{ cursor: 'pointer' }}>
+                                    <span onClick={() => confirmDeleteUnidad(item.codTipoGenerico, item.codTipoCadena, item.codTipoEntero, item.descripcion)} style={{ cursor: 'pointer' }}>
                                         <Trash color="DarkRed" size={24} title="Eliminar" />
                                     </span>
 

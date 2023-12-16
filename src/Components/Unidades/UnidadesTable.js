@@ -18,7 +18,7 @@ function UnidadesTable({ loading, filteredData, handleShow, confirmDeleteUnidad 
                 </thead>
                 <tbody>
 
-                    {loading ? <tr><td colSpan="5"><h2>Cargando...</h2></td></tr>
+                    {loading ? <tr><td className='text-center' colSpan="5"><h2>Cargando...</h2></td></tr>
                         : filteredData.map((unidad) => (
                             <tr key={unidad.codUnidad}>
                                 <td>{unidad.codUnidad}</td>

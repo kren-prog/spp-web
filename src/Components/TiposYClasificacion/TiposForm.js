@@ -2,7 +2,7 @@ import { BookmarkStarFill } from 'react-bootstrap-icons';
 import { Row, Col, Button } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 
-function TiposForm({ initialValues, onSubmit, isEditable }) {
+function TiposForm({ initialValues, onSubmit, isEdit }) {
 
   const { handleSubmit, register, watch, formState: { errors, isSubmitting } } = useForm({
     defaultValues: initialValues,
@@ -15,7 +15,6 @@ function TiposForm({ initialValues, onSubmit, isEditable }) {
         <Row>
 
           <Col>
-
             <div className='form-group'>
               <label>CodTipoGenerico</label>
               <input type='text' className='form-control'
@@ -23,6 +22,7 @@ function TiposForm({ initialValues, onSubmit, isEditable }) {
                   required: 'El campo \'CodTipoGenerico\' es requerido',
                   maxLength: { value: 3, message: 'El campo \'CodTipoGenerico\' no debe exceder los 3 caracteres' },
                 })}
+                disabled={isEdit}
               />
               {errors.CodTipoGenerico && <p className='text-danger'>{errors.CodTipoGenerico.message}</p>}
             </div>
@@ -36,6 +36,7 @@ function TiposForm({ initialValues, onSubmit, isEditable }) {
                   required: 'El campo \'CodTipoCadena\' es requerido',
                   maxLength: { value: 3, message: 'El campo \'CodTipoCadena\' no debe exceder los 3 caracteres' },
                 })}
+                disabled={isEdit}
               />
               {errors.codTipoCadena && <p className='text-danger'>{errors.codTipoCadena.message}</p>}
             </div>
@@ -44,7 +45,7 @@ function TiposForm({ initialValues, onSubmit, isEditable }) {
           <Col>
             <div className='form-group'>
               <label>CodTipoEntero</label>
-              <input type='number' className='form-control' {...register('codTipoEntero')} />
+              <input type='number' className='form-control' {...register('codTipoEntero')} disabled={isEdit}/>
               {errors.codTipoEntero && <p className='text-danger'>{errors.codTipoEntero.message}</p>}
             </div>
           </Col>
