@@ -3,7 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 //import { PlusCircle } from 'react-bootstrap-icons';
 
-function BasicModal({ children, handleClose, title }) {
+function BasicModal({ show, children, handleClose, title }) {
     // const [show, setShow] = useState(false);
 
     // const handleClose = () => setShow(false);
@@ -14,13 +14,7 @@ function BasicModal({ children, handleClose, title }) {
                 Añadir  <PlusCircle color="white" size={18} title="Add" />
             </Button> */}
 
-            <Modal
-                size="lg"
-                show={true}
-                onHide={handleClose}
-                backdrop="static"
-                keyboard={false}
-            >
+            <Modal size="lg" show={show} onHide={handleClose} backdrop="static" keyboard={false} >
                 <Modal.Header closeButton>
                     <Modal.Title>{title}</Modal.Title>
                 </Modal.Header>

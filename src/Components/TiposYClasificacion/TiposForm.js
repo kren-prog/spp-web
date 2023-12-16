@@ -1,72 +1,200 @@
 import { BookmarkStarFill } from 'react-bootstrap-icons';
-import { Form, Row, Col, Button, FloatingLabel } from 'react-bootstrap';
+import { Row, Col, Button } from 'react-bootstrap';
+import { useForm } from 'react-hook-form';
 
-function TiposForm() {
-  
+function TiposForm({ initialValues, onSubmit, isEditable }) {
+
+  const { handleSubmit, register, watch, formState: { errors, isSubmitting } } = useForm({
+    defaultValues: initialValues,
+  });
+
   return (
-    <Form>
-      <Row>
-        <Form.Group as={Col} controlId="codigo">
-          <Form.Label>Codigo</Form.Label>
-          <Form.Control type="number" className='w-25' />
-        </Form.Group>
-      </Row>
-      <Row>
-        <Form.Group as={Col} controlId="tipoCadena">
-          <Form.Label>Tipo cadena</Form.Label>
-          <Form.Control type="text" />
-        </Form.Group>
-        <Form.Group as={Col} controlId="tipoEntero">
-          <Form.Label>Tipo entero</Form.Label>
-          <Form.Control type="number" />
-        </Form.Group>
-        <Form.Group as={Col} controlId="secuencia">
-          <Form.Label>Secuencia</Form.Label>
-          <Form.Control type="number" />
-        </Form.Group>
-      </Row>
-      <Row>
-        <Form.Group as={Col} controlId="an1">
-          <Form.Label>Atributo N1</Form.Label>
-          <Form.Control type="number" />
-        </Form.Group>
-        <Form.Group as={Col} controlId="an2">
-          <Form.Label>Atributo N2</Form.Label>
-          <Form.Control type="number" />
-        </Form.Group> <Form.Group as={Col} controlId="an3">
-          <Form.Label>Atributo N3</Form.Label>
-          <Form.Control type="number" />
-        </Form.Group> <Form.Group as={Col} controlId="an4">
-          <Form.Label>Atributo N4</Form.Label>
-          <Form.Control type="number" />
-        </Form.Group>
-      </Row>
-      <Row>
-        <Form.Group as={Col} controlId="ac1">
-          <Form.Label>Atributo C1</Form.Label>
-          <Form.Control type="text" />
-        </Form.Group>
-        <Form.Group as={Col} controlId="ac2">
-          <Form.Label>Atributo C2</Form.Label>
-          <Form.Control type="text" />
-        </Form.Group>
-        <Form.Group as={Col} controlId="ac3">
-          <Form.Label>Atributo C3</Form.Label>
-          <Form.Control type="text" />
-        </Form.Group>
-        <Form.Group as={Col} controlId="ac4">
-          <Form.Label>Atributo C4</Form.Label>
-          <Form.Control type="text" />
-        </Form.Group>
-      </Row>
 
-      <div className='text-center'>
-        <Button variant="success" className='btn btn-sm m-2 fw-bold'>
-          Guardar <BookmarkStarFill color="white" size={18} title="Save" />
-        </Button>
-      </div>
+      <form onSubmit={handleSubmit(onSubmit)}>
 
-    </Form>
+        <Row>
+
+          <Col>
+
+            <div className='form-group'>
+              <label>CodTipoGenerico</label>
+              <input type='text' className='form-control'
+                {...register('codTipoGenerico', {
+                  required: 'El campo \'CodTipoGenerico\' es requerido',
+                  maxLength: { value: 3, message: 'El campo \'CodTipoGenerico\' no debe exceder los 3 caracteres' },
+                })}
+              />
+              {errors.CodTipoGenerico && <p className='text-danger'>{errors.CodTipoGenerico.message}</p>}
+            </div>
+          </Col>
+
+          <Col>
+            <div className='form-group'>
+              <label>CodTipoCadena</label>
+              <input type='text' className='form-control'
+                {...register('codTipoCadena', {
+                  required: 'El campo \'CodTipoCadena\' es requerido',
+                  maxLength: { value: 3, message: 'El campo \'CodTipoCadena\' no debe exceder los 3 caracteres' },
+                })}
+              />
+              {errors.codTipoCadena && <p className='text-danger'>{errors.codTipoCadena.message}</p>}
+            </div>
+          </Col>
+
+          <Col>
+            <div className='form-group'>
+              <label>CodTipoEntero</label>
+              <input type='number' className='form-control' {...register('codTipoEntero')} />
+              {errors.codTipoEntero && <p className='text-danger'>{errors.codTipoEntero.message}</p>}
+            </div>
+          </Col>
+
+        </Row>
+
+        <Row>
+
+          <Col>
+            <div className='form-group'>
+              <label>AtributoC1</label>
+              <input
+                type="text" className='form-control'
+                {...register('atributoC1', { maxLength: { value: 3, message: 'El campo \'AtributoC1\' no debe exceder los 3 caracteres' } })}
+              />
+              {errors.atributoC1 && <p className='text-danger'>{errors.atributoC1.message}</p>}
+            </div>
+          </Col>
+
+          <Col>
+            <div className='form-group'>
+              <label>AtributoC2</label>
+              <input
+                type="text" className='form-control'
+                {...register('atributoC2', { maxLength: { value: 3, message: 'El campo \'AtributoC2\' no debe exceder los 3 caracteres' } })}
+              />
+              {errors.atributoC2 && <p className='text-danger'>{errors.atributoC2.message}</p>}
+            </div>
+          </Col>
+
+          <Col>
+            <div className='form-group'>
+              <label>AtributoC3</label>
+              <input
+                type="text" className='form-control'
+                {...register('atributoC3', { maxLength: { value: 3, message: 'El campo \'AtributoC3\' no debe exceder los 3 caracteres' } })}
+              />
+              {errors.atributoC3 && <p className='text-danger'>{errors.atributoC3.message}</p>}
+            </div>
+          </Col>
+
+          <Col>
+            <div className='form-group'>
+              <label>AtributoC4</label>
+              <input
+                type="text" className='form-control'
+                {...register('atributoC4', { maxLength: { value: 3, message: 'El campo \'AtributoC4\' no debe exceder los 3 caracteres' } })}
+              />
+              {errors.atributoC4 && <p className='text-danger'>{errors.atributoC4.message}</p>}
+            </div>
+          </Col>
+
+        </Row>
+
+        <Row>
+
+          <Col>
+            <div className='form-group'>
+              <label>AtributoN1</label>
+              <input
+                type="number" className='form-control'
+                {...register('atributoN1')}
+              />
+              {errors.atributoN1 && <p className='text-danger'>{errors.atributoN1.message}</p>}
+            </div>
+          </Col>
+
+          <Col>
+            <div className='form-group'>
+              <label>AtributoN2</label>
+              <input
+                type="number" className='form-control'
+                {...register('atributoN2')}
+              />
+              {errors.atributoN2 && <p className='text-danger'>{errors.atributoN2.message}</p>}
+            </div>
+          </Col>
+
+          <Col>
+            <div className='form-group'>
+              <label>AtributoN3</label>
+              <input
+                type="number" className='form-control'
+                {...register('atributoN3')}
+              />
+              {errors.atributoN3 && <p className='text-danger'>{errors.atributoN3.message}</p>}
+            </div>
+          </Col>
+
+          <Col>
+            <div className='form-group'>
+              <label>AtributoN4</label>
+              <input
+                type="number" className='form-control'
+                {...register('atributoN4')}
+              />
+              {errors.atributoN4 && <p className='text-danger'>{errors.atributoN4.message}</p>}
+            </div>
+          </Col>
+
+        </Row>
+
+        <div className='form-group'>
+          <label>Descripcion</label>
+          <input
+            type="text" className='form-control'
+            {...register('descripcion', {
+              maxLength: { value: 40, message: 'El campo \'Descripcion\' no debe exceder los 40 caracteres' },
+            })}
+          />
+          {errors.descripcion && <p className='text-danger'>{errors.descripcion.message}</p>}
+        </div>
+
+        <div className='form-group'>
+          <label>DescripcionAtributos</label>
+          <input
+            type="text" className='form-control'
+            {...register('descripcionAtributos', {
+              maxLength: { value: 200, message: 'El campo \'DescripcionAtributos\' no debe exceder los 200 caracteres' },
+            })}
+          />
+          {errors.descripcionAtributos && <p className='text-danger'>{errors.descripcionAtributos.message}</p>}
+        </div>
+
+        <div className='form-group'>
+          <label>Secuencia</label>
+          <input
+            type="number" className='form-control'
+            {...register('secuencia')}
+          />
+          {errors.secuencia && <p className='text-danger'>{errors.secuencia.message}</p>}
+        </div>
+
+        <div className='form-group'>
+          <label>SwModificaUsuario</label>
+          <input
+            type="number" className='form-control'
+            {...register('swModificaUsuario')}
+          />
+          {errors.swModificaUsuario && <p className='text-danger'>{errors.swModificaUsuario.message}</p>}
+        </div>
+
+        <div className='text-center'>
+          <Button variant="success" className='btn btn-sm m-2 fw-bold' type="submit" disabled={isSubmitting}>
+            {isSubmitting ? 'Enviando...' : 'Guardar'} <BookmarkStarFill color="white" size={18} title="Save" />
+          </Button>
+        </div>
+
+      </form>
+    
   );
 }
 
