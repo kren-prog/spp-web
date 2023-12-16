@@ -1,9 +1,9 @@
 import React from 'react'
-import FormUnidades from './FormUnidades'
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
+import UnidadesForm from './UnidadesForm';
 
-function ModalUnidades({ show, handleClose, title, initialValues, onSubmit }) {
+function UnidadesModal({ show, handleClose, title, initialValues, onSubmit }) {
     let isEdit;
     title === "Registrar unidad" ? isEdit = true : isEdit = false;
 
@@ -14,7 +14,7 @@ function ModalUnidades({ show, handleClose, title, initialValues, onSubmit }) {
             </Modal.Header>
             <Modal.Body className='bg-primary bg-opacity-10'>
 
-                <FormUnidades initialValues={initialValues} onSubmit={onSubmit} isEditable={isEdit} />
+                <UnidadesForm initialValues={initialValues} onSubmit={onSubmit} isEditable={isEdit} />
 
             </Modal.Body>
             <Modal.Footer>
@@ -27,4 +27,4 @@ function ModalUnidades({ show, handleClose, title, initialValues, onSubmit }) {
     )
 }
 
-export default ModalUnidades
+export default UnidadesModal

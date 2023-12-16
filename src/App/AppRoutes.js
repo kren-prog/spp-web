@@ -39,8 +39,6 @@ import SuspenseDefault from 'Components/SuspenseDefault';
 
 import Login from '../Components/Login';
 import NotFound from '../Pages/notFound';
-import IsUnidades from 'Pages/Maestros/Basicos/IsUnidades';
-import RedirectOnTokenExpiration from 'App/tokenExpiration';
 import ProtectedRoute from './ProtectedRoute';
 
 class AppRoutes extends Component {
@@ -61,13 +59,12 @@ class AppRoutes extends Component {
         <Route element={<ProtectedRoute />} >
 
           <Route path='/maestros-pages/basicos-unidades'
-            element={<SuspenseDefault path={import('Pages/Maestros/Basicos/IsUnidades')} />}>
+            element={<SuspenseDefault path={import('Pages/Maestros/Basicos/Unidades')} />}>
           </Route>
 
           <Route path="/maestros-pages/basicos-departamentos" element={<DepartamentosMunicipios />} />
 
         </Route>
-
 
 
         <Route path="/maestros-pages/configuracion-opcional" element={<ConfiguracionOpcional />} />
