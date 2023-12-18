@@ -24,7 +24,7 @@ function TiposForm({ initialValues, onSubmit, isEdit }) {
                 })}
                 disabled={isEdit}
               />
-              {errors.CodTipoGenerico && <p className='text-danger'>{errors.CodTipoGenerico.message}</p>}
+              {errors.codTipoGenerico && <p className='text-danger'>{errors.codTipoGenerico.message}</p>}
             </div>
           </Col>
 
@@ -45,7 +45,8 @@ function TiposForm({ initialValues, onSubmit, isEdit }) {
           <Col>
             <div className='form-group'>
               <label>CodTipoEntero</label>
-              <input type='number' className='form-control' {...register('codTipoEntero')} disabled={isEdit}/>
+              <input type='number' className='form-control' {...register('codTipoEntero', {
+                  required: 'El campo \'CodTipoEntero\' es requerido'})} disabled={isEdit}/>
               {errors.codTipoEntero && <p className='text-danger'>{errors.codTipoEntero.message}</p>}
             </div>
           </Col>

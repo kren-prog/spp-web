@@ -97,6 +97,7 @@ function TiposYClasificacion() {
         setShow(true);
         setSelectedItem(defaultValues);
         if (op === 1) {
+            setIsEdit(false);
             setTitle("Registrar");
         } else if (op === 2) {
             setTitle("Editar");
@@ -144,7 +145,7 @@ function TiposYClasificacion() {
             showCancelButton: true, confirmButtonText: 'Si, eliminar', cancelButtonText: 'Cancelar'
         }).then((result) => {
             if (result.isConfirmed) {
-                const newUrl = url + "/" + tipo.trim() + "/" + cod.trim() + "/" + num.trim();
+                const newUrl = url + "/" + tipo.trim() + "/" + cod.trim() + "/" + num;
                 enviarSolicitud(3, newUrl);
             }
         });
@@ -155,7 +156,7 @@ function TiposYClasificacion() {
         if (operacion === 1) {
             enviarSolicitud(1, url, data);
         } else {
-            const newUrl = url + "/" + data.codTipoGenerico.trim() + "/" + data.codTipoCadena.trim() + "/" + data.codTipoEntero.trim();
+            const newUrl = url + "/" + data.codTipoGenerico.trim() + "/" + data.codTipoCadena.trim() + "/" + data.codTipoEntero;
             enviarSolicitud(2, newUrl, data);
         }
     };
