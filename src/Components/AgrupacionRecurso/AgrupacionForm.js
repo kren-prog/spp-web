@@ -65,7 +65,7 @@ function AgrupacionForm({ initialValues, onSubmit, isEdit }) {
               type="number" className='form-control'
               {...register('rpm')}
             />
-            {errors.rpm && <p>{errors.rpm.message}</p>}
+            {errors.rpm && <p className='text-danger'>{errors.rpm.message}</p>}
           </div>
         </Col>
         <Col>

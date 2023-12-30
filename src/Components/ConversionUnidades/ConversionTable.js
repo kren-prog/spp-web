@@ -1,102 +1,58 @@
 import React from 'react'
-import { Table, Row } from 'react-bootstrap';
-import { Pencil } from 'react-bootstrap-icons';
-import SweetAlert from '../SweetAlert';
-import { useForm } from '../../App/useForm';
-import BasicModal from '../BasicModal';
-import BasicPaginate from '../BasicPaginate';
-import ConversionForm from './ConversionForm';
-import SearchBar from '../SearchBar';
-import ItemsPerPage from '../ItemsPerPage';
+import { Table } from 'react-bootstrap';
+import { Pencil, Trash } from 'react-bootstrap-icons';
 
-function ConversionTable() {
-
-    const { show, handleClose, handleShow, searchTerm, handleSearch, numberOfRows, itemsPerPage, handleChangeItems, alertResponse, handleAlertResponse } = useForm();
-
-    const [currentPage, setCurrentPage] = React.useState(1);
-
-
-    function handlePageClick({ selected: selectedPage }) {
-        setCurrentPage(selectedPage);
-    }
-
-    const data = [
-        { code: 'KLG', description: 'Kilogramos', decimal: 1, magnitud: 'Masa' },
-        { code: 'UN', description: 'Unidad', decimal: 0, magnitud: 'Otras' },
-        { code: 'MTS', description: 'Metros', decimal: 1, magnitud: 'Longitud' },
-        { code: 'PRE', description: 'Prendas', decimal: 0, magnitud: 'Superficie' },
-    ];
-    const totalPages = Math.ceil(data.length / itemsPerPage); // data.length
-
-    const startIndex = (currentPage - 1) * itemsPerPage;
-    const endIndex = startIndex + itemsPerPage;
-    const filteredData = data.filter((item) =>
-        Object.values(item).some(
-            (value) =>
-                typeof value === 'string' &&
-                value.toLowerCase().includes(searchTerm.toLowerCase())
-        )
-    );
-    const currentData = filteredData.slice(startIndex, endIndex);
+function ConversionTable({ loading, filteredData, handleShow, confirmDeleteItem }) {
 
     return (
-        <>
-            <Row>
-                <SearchBar searchTerm={searchTerm} handleSearch={handleSearch} />
 
-                <ItemsPerPage handleChangeItems={handleChangeItems} numberOfRows={numberOfRows} />
-            </Row>
 
-            <Table striped bordered hover responsive size="sm">
-                <thead>
-                    <tr>
-                        <th>Unidad Origen</th>
-                        <th>Factor</th>
-                        <th>Unidad destino</th>
-                        <th>Usa sql factor</th>
+        <Table striped bordered hover responsive size="sm">
+            <thead>
+                <tr>
+                    <th>Unidad Origen</th>
+                    <th>Factor</th>
+                    <th>Unidad destino</th>
+                    <th>Usa sql factor</th>
+                    <th>sql factor</th>
+                    <th>Arg 1</th>
+                    <th>Arg 2</th>
+                    <th>Arg 3</th>
 
-                        <th className="fixed-column">Acciones</th>
+                    <th className="fixed-column">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                {loading ? <tr><td className='text-center' colSpan="14"><h2>Cargando...</h2></td></tr>
+                    : filteredData.map((item) => (
+                    <tr key={item.ideConversion}>
+                        <td>{item.codUnidadOrigen}</td>
+                        <td>{item.factor}</td>
+                        <td>{item.codUnidadDestino}</td>
+                        <td>{item.usaSqlFactor ? "SI" : "NO"}</td>
+                        <td>{item.sqlFactor}</td>
+                        <td>{item.arg1}</td>
+                        <td>{item.arg2}</td>
+                        <td>{item.arg3}</td>
+                        <td className="fixed-column">
+                            <div className="d-flex p-2">
+                                <span onClick={() => handleShow(2, item)} style={{ cursor: 'pointer' }}>
+                                    <Pencil color="royalblue" size={24} title="Editar" />
+                                </span>
+
+                                <span onClick={() => confirmDeleteItem(item.ideConversion)} style={{ cursor: 'pointer' }}>
+                                    <Trash color="DarkRed" size={24} title="Eliminar" />
+                                </span>
+                            </div>
+                        </td>
                     </tr>
-                </thead>
-                <tbody>
+                ))}
 
-                    {currentData.map((item) => (
-                        <tr key={item.code}>
-                            <td>{item.code}</td>
-                            <td>{item.description}</td>
-                            <td>{item.decimal}</td>
-                            <td>{item.magnitud}</td>
-                            <td className="fixed-column">
-                                <div className="d-flex p-2">
-                                    <span onClick={handleShow} style={{ cursor: 'pointer' }}>
-                                        <Pencil color="royalblue" size={24} title="Editar" />
-                                    </span>
-                                    {/* Aca tendria que enviar el id  */}
-                                    {
-                                        show && (
-                                            <BasicModal handleClose={handleClose} title={"Editar"}>
-                                                <ConversionForm />
-                                            </BasicModal>
-                                        )}
+            </tbody>
+        </Table>
 
-                                    <SweetAlert onAlertResponse={handleAlertResponse}
-                                        title="Esta seguro?"
-                                        text="Se eliminara el item."
-                                        icon="warning"
-                                        typebtn="delete"
-                                    />
-                                     {/* <p> {alertResponse}</p> */}
-                                </div>
-                            </td>
-                        </tr>
-                    ))}
 
-                </tbody>
-            </Table>
-            <div className='d-flex justify-content-center'>
-                <BasicPaginate totalPages={totalPages} handlePageClick={handlePageClick} />
-            </div>
-        </>
     )
 }
 

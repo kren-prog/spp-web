@@ -1,10 +1,17 @@
 import React from 'react'
-import {Form, Row, Col, Button } from 'react-bootstrap';
+import { Form, Row, Col, Button } from 'react-bootstrap';
 import { BookmarkStarFill } from 'react-bootstrap-icons';
+import { useForm } from 'react-hook-form';
 
-function FabricaForm() {
+function FabricaForm({ initialValues, onSubmit }) {
+
+  const { handleSubmit, register, watch, setValue, formState: { errors, isSubmitting } } = useForm({
+    defaultValues: initialValues,
+  });
+
   return (
-    <Form>
+    <>
+      <Form>
 
         <Row>
           <Form.Group as={Col} controlId="codigo">
@@ -96,11 +103,16 @@ function FabricaForm() {
           </Form.Group>
         </Row>
         <div className='text-center'>
-                <Button variant="success" className='btn btn-sm m-2 fw-bold'>
-                    Guardar <BookmarkStarFill color="white" size={18} title="Save" />
-                </Button>
-            </div>
+          <Button variant="success" className='btn btn-sm m-2 fw-bold'>
+            Guardar <BookmarkStarFill color="white" size={18} title="Save" />
+          </Button>
+        </div>
       </Form>
+
+     
+
+
+    </>
   )
 }
 

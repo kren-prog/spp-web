@@ -174,7 +174,7 @@ function TiposYClasificacion() {
                 <SearchBar searchTerm={searchTerm} handleSearch={handleSearchTermChange} />
             </Row>
 
-            <TiposTable loading={loading} filteredData={filteredData} handleShow={handleShow} confirmDeleteUnidad={confirmDeleteTipoG} />
+            <TiposTable loading={loading} filteredData={filteredData} handleShow={handleShow} confirmDeleteItem={confirmDeleteTipoG} />
 
             <div className='d-flex justify-content-center'>
                 <BasicPaginate totalPages={totalPages} handlePageClick={handlePageClick} />

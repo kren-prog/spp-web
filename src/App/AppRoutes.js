@@ -54,7 +54,7 @@ class AppRoutes extends Component {
 
         <Route path="/login" element={<Login />} />
 
-        <Route path="/spp-web" element={<SuspenseDefault path={import('Components/Landing')} />} />
+        <Route path="/" element={<SuspenseDefault path={import('Components/Landing')} />} />
 
         <Route element={<ProtectedRoute />} >
 

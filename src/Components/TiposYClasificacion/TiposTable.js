@@ -2,7 +2,7 @@ import React from 'react'
 import { Table } from 'react-bootstrap';
 import { Pencil, Trash } from 'react-bootstrap-icons';
 
-function TableTipos({ loading, filteredData, handleShow, confirmDeleteUnidad }) {
+function TableTipos({ loading, filteredData, handleShow, confirmDeleteItem }) {
 
 
     return (
@@ -52,7 +52,7 @@ function TableTipos({ loading, filteredData, handleShow, confirmDeleteUnidad }) 
                                         <Pencil color="royalblue" size={24} title="Editar" />
                                     </span>
 
-                                    <span onClick={() => confirmDeleteUnidad(item.codTipoGenerico, item.codTipoCadena, item.codTipoEntero, item.descripcion)} style={{ cursor: 'pointer' }}>
+                                    <span onClick={() => confirmDeleteItem(item.codTipoGenerico, item.codTipoCadena, item.codTipoEntero, item.descripcion)} style={{ cursor: 'pointer' }}>
                                         <Trash color="DarkRed" size={24} title="Eliminar" />
                                     </span>
 

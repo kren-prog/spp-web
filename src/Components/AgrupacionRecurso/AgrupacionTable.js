@@ -2,7 +2,7 @@ import React from 'react'
 import { Table} from 'react-bootstrap';
 import { Pencil, Trash } from 'react-bootstrap-icons';
 
-function AgrupacionTable({ loading, filteredData, handleShow, confirmDeleteUnidad }) {
+function AgrupacionTable({ loading, filteredData, handleShow, confirmDeleteItem }) {
    
     return (
 
@@ -41,7 +41,7 @@ function AgrupacionTable({ loading, filteredData, handleShow, confirmDeleteUnida
                                         <Pencil color="royalblue" size={24} title="Editar" />
                                     </span>
 
-                                    <span onClick={() => confirmDeleteUnidad(item.tipoRecurso, item.agrupacion, item.desAgrupacion)} style={{ cursor: 'pointer' }}>
+                                    <span onClick={() => confirmDeleteItem(item.tipoRecurso, item.agrupacion, item.desAgrupacion)} style={{ cursor: 'pointer' }}>
                                         <Trash color="DarkRed" size={24} title="Eliminar" />
                                     </span>
                                 </div>

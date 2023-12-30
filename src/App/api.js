@@ -3,7 +3,7 @@ import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 
 // http://www.ingesoftware.net:8015  https://localhost:7197
-const API_BASE_URL = 'http://www.ingesoftware.net:8015/api';
+const API_BASE_URL = 'https://localhost:7197/api';
 
 const callApi = async (url, method, data = null) => {
    

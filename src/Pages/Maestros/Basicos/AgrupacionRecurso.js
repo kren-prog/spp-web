@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import AgrupacionForm from '../../../Components/AgrupacionRecurso/AgrupacionForm';
-import AgrupacionTable from '../../../Components/AgrupacionRecurso/AgrupacionTable';
-import BasicModal from '../../../Components/BasicModal';
-import { PlusCircle } from 'react-bootstrap-icons';
-import { Button, Row, Col } from 'react-bootstrap';
+import AgrupacionForm from 'Components/AgrupacionRecurso/AgrupacionForm';
+import AgrupacionTable from 'Components/AgrupacionRecurso/AgrupacionTable';
+import BasicModal from 'Components/BasicModal';
 import ItemsPerPage from 'Components/ItemsPerPage';
 import SearchBar from 'Components/SearchBar';
 import BasicPaginate from 'Components/BasicPaginate';
+import { PlusCircle } from 'react-bootstrap-icons';
+import { Button, Row, Col } from 'react-bootstrap';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 import { fetchData, createData, updateData, deleteData } from 'App/api';
@@ -157,7 +157,7 @@ function AgrupacionRecurso() {
     }
   };
 
-  return (
+  return ( 
     <>
 
       <Row>
@@ -170,7 +170,7 @@ function AgrupacionRecurso() {
         <SearchBar searchTerm={searchTerm} handleSearch={handleSearchTermChange} />
       </Row>
 
-      <AgrupacionTable loading={loading} filteredData={filteredData} handleShow={handleShow} confirmDeleteUnidad={confirmDeleteAgrupacionR} />
+      <AgrupacionTable loading={loading} filteredData={filteredData} handleShow={handleShow} confirmDeleteItem={confirmDeleteAgrupacionR} />
 
       <div className='d-flex justify-content-center'>
         <BasicPaginate totalPages={totalPages} handlePageClick={handlePageClick} />
